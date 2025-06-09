@@ -1,0 +1,102 @@
+/* === MENU SECTION === */
+.menu-section {
+  padding: 60px 20px;
+  background-color: #fff;
+  text-align: center;
+}
+
+.menu-title {
+  font-size: 28px;
+  margin-bottom: 30px;
+  font-weight: 600;
+  color: #333;
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.menu-item {
+  background: #f9f9f9;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  transition: transform 0.2s ease;
+}
+
+.menu-item:hover {
+  transform: translateY(-4px);
+}
+
+.menu-item img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin-bottom: 15px;
+  border-radius: 50%;
+}
+.menu-details {
+  width: 100%;
+}
+
+.menu-details h3 {
+  font-size: 18px;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.menu-details p {
+  font-size: 16px;
+  color: #777;
+}
+
+/* Add button */
+.add-btn {
+  background-color: #1c1c1c;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.add-btn:hover {
+  background-color: #000;
+}
+
+.menu-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-top: 10px;
+  padding: 0 5px;
+}
+.menu-footer .price {
+  font-size: 16px;
+  color: #333;
+}
+
+/*@media (min-width: 1200px) {
+  .menu-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}*/
+
+@media (max-width: 767px) {
+  .menu-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

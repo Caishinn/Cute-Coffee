@@ -1,0 +1,141 @@
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 999;
+  display: none;
+}
+
+.menu-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 90%;
+  max-width: 400px;
+  background: #fff;
+  border-radius: 10px;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  padding: 20px;
+  display: none;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+}
+
+.menu-modal .modal-content {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.menu-modal img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.menu-modal h3 {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.option-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.options label {
+  margin-right: 10px;
+  font-size: 14px;
+}
+
+.quantity-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.qty-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.qty-controls button {
+  width: 30px;
+  height: 30px;
+  border: none;
+  background: #333;
+  color: white;
+  font-size: 18px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.confirm-btn {
+  background-color: #1c1c1c;
+  color: #fff;
+  padding: 12px;
+  border: none;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.close-modal {
+  position: absolute;
+  top: 10px;
+  right: 16px;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.modal-overlay,
+.menu-modal {
+  display: none;
+}
+
+/* Model actions*/
+
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+/* Cancel button */
+.cancel-btn {
+  background-color: #f6f6f6;
+  color: #979797;
+  padding: 10px 20px;
+  border: none;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* Add button */
+.confirm-btn {
+  background-color: #1c1c1c;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.cancel-btn:hover {
+  background-color: #e6e6e6;
+}
+
+.confirm-btn:hover {
+  background-color: #000;
+}
+.no-scroll {
+  overflow: hidden;
+  height: 1vh;
+}

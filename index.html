@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Furniture | Shopping Cart</title>
     <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/menu.css" />
+    <link rel="stylesheet" href="./css/model.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
       rel="stylesheet"
@@ -70,6 +72,136 @@
       <p>Home / Shopping Cart</p>
     </section>
 
+    <section class="menu-section">
+      <h2 class="menu-title">Our Café Menu</h2>
+      <div class="menu-grid">
+        <!-- Menu Item -->
+        <div class="menu-item">
+          <img src="./cafe-image/image.png" alt="Latte" />
+          <div class="menu-details">
+            <h3>Latte</h3>
+            <div class="menu-footer">
+              <p>$3.50</p>
+              <button class="add-btn"><i class="fas fa-plus"></i></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-item">
+          <img src="./cafe-image/image.png" alt="Latte" />
+          <div class="menu-details">
+            <h3>Latte</h3>
+            <div class="menu-footer">
+              <p>$3.50</p>
+              <button class="add-btn"><i class="fas fa-plus"></i></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-item">
+          <img src="./cafe-image/image.png" alt="Latte" />
+          <div class="menu-details">
+            <h3>Latte</h3>
+            <div class="menu-footer">
+              <p>$3.50</p>
+              <button class="add-btn"><i class="fas fa-plus"></i></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-item">
+          <img src="./cafe-image/image.png" alt="Latte" />
+          <div class="menu-details">
+            <h3>Latte</h3>
+            <div class="menu-footer">
+              <p>$3.50</p>
+              <button class="add-btn"><i class="fas fa-plus"></i></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-item">
+          <img src="./cafe-image/image.png" alt="Latte" />
+          <div class="menu-details">
+            <h3>Latte</h3>
+            <div class="menu-footer">
+              <p>$3.50</p>
+              <button class="add-btn"><i class="fas fa-plus"></i></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-item">
+          <img src="./cafe-image/image.png" alt="Latte" />
+          <div class="menu-details">
+            <h3>Latte</h3>
+            <div class="menu-footer">
+              <p>$3.50</p>
+              <button class="add-btn"><i class="fas fa-plus"></i></button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Add more items as needed -->
+      </div>
+    </section>
+
+    <!-- Overlay & Modal -->
+    <div class="modal-overlay" id="modalOverlay"></div>
+    <div class="menu-modal" id="menuModal">
+      <div class="modal-content">
+        <span class="close-modal" id="closeModal">&times;</span>
+        <img id="modalImage" src="" alt="Item Image" />
+        <h3 id="modalTitle">Item Name</h3>
+
+        <!-- Sugar Options -->
+        <div class="option-group">
+          <label>Sugar:</label>
+          <div class="options">
+            <label
+              ><input type="radio" name="sugar" value="no" /> No Sugar</label
+            >
+            <label
+              ><input type="radio" name="sugar" value="less" /> Less
+              Sugar</label
+            >
+            <label
+              ><input type="radio" name="sugar" value="normal" checked /> Normal
+              Sugar</label
+            >
+          </div>
+        </div>
+
+        <!-- Size Options -->
+        <div class="option-group">
+          <label>Size:</label>
+          <div class="options">
+            <label
+              ><input type="radio" name="size" value="s" checked /> S</label
+            >
+            <label><input type="radio" name="size" value="m" /> M</label>
+          </div>
+        </div>
+
+        <!-- Quantity Selector -->
+        <div class="option-group quantity-group">
+          <label>Quantity:</label>
+          <div class="qty-controls">
+            <button id="decreaseQty">-</button>
+            <span id="qtyValue">1</span>
+            <button id="increaseQty">+</button>
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button class="cancel-btn" id="cancelModal">Cancel</button>
+          <button class="confirm-btn">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+
     <script src="./js/main.js"></script>
+    <script src="./js/menu.js"></script>
+    <script src="./js/model.js"></script>
   </body>
 </html>
