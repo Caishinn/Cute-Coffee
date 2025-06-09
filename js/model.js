@@ -1,4 +1,3 @@
-// Cart array to hold items
 const cart = [];
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -15,14 +14,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const increaseBtn = document.getElementById("increaseQty");
   const decreaseBtn = document.getElementById("decreaseQty");
 
-  let quantity = 1;
-
   function openModal() {
     modal.style.display = "block";
     overlay.style.display = "block";
     document.body.classList.add("no-scroll");
-    quantity = 1;
-    qtyValue.textContent = quantity;
+    qtyValue.textContent = "1";
+    qtyValue.setAttribute("contenteditable", "false");
   }
 
   function closeModal() {
@@ -50,36 +47,58 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Quantity controls
   increaseBtn.addEventListener("click", () => {
-    quantity++;
-    qtyValue.textContent = quantity;
+    let current = parseInt(qtyValue.textContent);
+    qtyValue.textContent = current + 1;
   });
 
   decreaseBtn.addEventListener("click", () => {
-    if (quantity > 1) {
-      quantity--;
-      qtyValue.textContent = quantity;
+    let current = parseInt(qtyValue.textContent);
+    if (current > 1) {
+      qtyValue.textContent = current - 1;
     }
   });
 
-  // ✅ Add to Cart Button
+  // Enable manual typing
+  qtyValue.addEventListener("click", () => {
+    qtyValue.setAttribute("contenteditable", "true");
+    qtyValue.focus();
+  });
+
+  qtyValue.addEventListener("blur", () => {
+    let val = parseInt(qtyValue.textContent);
+    if (isNaN(val) || val < 1) val = 1;
+    qtyValue.textContent = val;
+    qtyValue.removeAttribute("contenteditable");
+  });
+
+  qtyValue.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      qtyValue.blur();
+    }
+  });
+
+  // Add to cart
   addToCartBtn.addEventListener("click", () => {
     const itemName = modalTitle.textContent;
     const itemImage = modalImage.src;
-    const sugar = document.querySelector('input[name="sugar"]:checked').value;
-    const size = document.querySelector('input[name="size"]:checked').value;
+    const sugar =
+      document.querySelector('input[name="sugar"]:checked')?.value || "normal";
+    const size =
+      document.querySelector('input[name="size"]:checked')?.value || "M";
+    const quantity = parseInt(qtyValue.textContent);
 
     const cartItem = {
       name: itemName,
       image: itemImage,
-      sugar: sugar,
-      size: size,
-      quantity: quantity,
+      sugar,
+      size,
+      quantity,
     };
 
-    // Store in array (can change to localStorage later)
     cart.push(cartItem);
     console.log("✅ Item added to cart:", cartItem);
-    console.log("🛒 Current cart:", cart);
+    console.log("🛒 Cart contents:", cart);
 
     closeModal();
   });

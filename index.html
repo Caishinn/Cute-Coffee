@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="./css/style.css" />
     <link rel="stylesheet" href="./css/menu.css" />
     <link rel="stylesheet" href="./css/model.css" />
+    <link rel="stylesheet" href="./css/cart.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
       rel="stylesheet"
@@ -148,49 +149,74 @@
     <div class="modal-overlay" id="modalOverlay"></div>
     <div class="menu-modal" id="menuModal">
       <div class="modal-content">
-        <span class="close-modal" id="closeModal">&times;</span>
-        <img id="modalImage" src="" alt="Item Image" />
-        <h3 id="modalTitle">Item Name</h3>
+        <div class="modal-body">
+          <span class="close-modal" id="closeModal">&times;</span>
+          <img id="modalImage" src="" alt="Item Image" />
+          <h3 id="modalTitle">Item Name</h3>
 
-        <!-- Sugar Options -->
-        <div class="option-group">
-          <label>Sugar:</label>
-          <div class="options">
-            <label
-              ><input type="radio" name="sugar" value="no" /> No Sugar</label
-            >
-            <label
-              ><input type="radio" name="sugar" value="less" /> Less
-              Sugar</label
-            >
-            <label
-              ><input type="radio" name="sugar" value="normal" checked /> Normal
-              Sugar</label
-            >
+          <!-- Sugar Options -->
+          <div class="option-group">
+            <label>Sugar:</label>
+            <div class="options">
+              <label
+                ><input type="radio" name="sugar" value="no" /> No Sugar</label
+              >
+              <label
+                ><input type="radio" name="sugar" value="less" /> Less
+                Sugar</label
+              >
+              <label
+                ><input type="radio" name="sugar" value="normal" checked />
+                Normal Sugar</label
+              >
+            </div>
+          </div>
+
+          <!-- Size Options -->
+          <div class="option-group">
+            <label>Size:</label>
+            <div class="options">
+              <label
+                ><input type="radio" name="size" value="s" checked /> S</label
+              >
+              <label><input type="radio" name="size" value="m" /> M</label>
+            </div>
+          </div>
+
+          <!-- Size Options -->
+          <div class="option-group">
+            <label>Size:</label>
+            <div class="options">
+              <label
+                ><input type="radio" name="size" value="s" checked /> S</label
+              >
+              <label><input type="radio" name="size" value="m" /> M</label>
+            </div>
+          </div>
+
+          <!-- Size Options -->
+          <div class="option-group">
+            <label>Size:</label>
+            <div class="options">
+              <label
+                ><input type="radio" name="size" value="s" checked /> S</label
+              >
+              <label><input type="radio" name="size" value="m" /> M</label>
+            </div>
+          </div>
+
+          <!-- Quantity Selector -->
+          <div class="option-group quantity-group">
+            <label>Quantity:</label>
+            <div class="qty-controls">
+              <button id="decreaseQty">-</button>
+              <span id="qtyValue">1</span>
+              <button id="increaseQty">+</button>
+            </div>
           </div>
         </div>
 
-        <!-- Size Options -->
-        <div class="option-group">
-          <label>Size:</label>
-          <div class="options">
-            <label
-              ><input type="radio" name="size" value="s" checked /> S</label
-            >
-            <label><input type="radio" name="size" value="m" /> M</label>
-          </div>
-        </div>
-
-        <!-- Quantity Selector -->
-        <div class="option-group quantity-group">
-          <label>Quantity:</label>
-          <div class="qty-controls">
-            <button id="decreaseQty">-</button>
-            <span id="qtyValue">1</span>
-            <button id="increaseQty">+</button>
-          </div>
-        </div>
-
+        <!-- Sticky Buttons -->
         <div class="modal-actions">
           <button class="cancel-btn" id="cancelModal">Cancel</button>
           <button class="confirm-btn">Add to Cart</button>
@@ -198,10 +224,26 @@
       </div>
     </div>
 
+    <!-- 🛒 Cart Drawer -->
+    <div id="cartDrawer" class="cart-drawer">
+      <div class="cart-header">
+        <h3>Your Cart</h3>
+        <span class="close-cart" id="closeCart">&times;</span>
+      </div>
+      <div class="cart-items" id="cartItems">
+        <p class="empty-msg">Your cart is empty</p>
+      </div>
+      <div class="cart-footer">
+        <button class="checkout-btn">Checkout</button>
+      </div>
+    </div>
+    <div id="cartOverlay" class="cart-overlay"></div>
+
     <!--Link JS-->
 
     <script src="./js/main.js"></script>
     <script src="./js/menu.js"></script>
     <script src="./js/model.js"></script>
+    <script src="./js/cart.js"></script>
   </body>
 </html>

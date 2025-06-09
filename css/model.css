@@ -25,12 +25,31 @@
   box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
 }
 
-.menu-modal .modal-content {
+.modal-content {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  max-height: 80vh;
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 80px; /* space for sticky buttons */
 }
 
+/* Make the content scrollable except the buttons */
+.modal-body {
+  overflow-y: auto;
+  flex: 1;
+  padding-right: 4px; /* optional: keep scrollbar from overlapping */
+}
+.modal-actions {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+
+  display: flex;
+  justify-content: space-between;
+  padding-top: 10px;
+}
 .menu-modal img {
   width: 100%;
   border-radius: 10px;
@@ -63,7 +82,7 @@
 .qty-controls {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 16px;
 }
 
 .qty-controls button {
@@ -75,6 +94,16 @@
   font-size: 18px;
   border-radius: 50%;
   cursor: pointer;
+}
+
+#qtyValue[contenteditable="true"] {
+  border: 1px solid #ccc;
+  padding: 2px 6px;
+  background: #fff;
+  outline: none;
+  min-width: 30px;
+  display: inline-block;
+  text-align: center;
 }
 
 .confirm-btn {
@@ -98,14 +127,6 @@
 .modal-overlay,
 .menu-modal {
   display: none;
-}
-
-/* Model actions*/
-
-.modal-actions {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
 }
 
 /* Cancel button */
