@@ -1,0 +1,75 @@
+/* Basic Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+body {
+  background-color: #f8f8f8;
+  color: #333;
+  padding: 40px 20px;
+}
+
+/* Summary container */
+.summary-container {
+  max-width: 600px;
+  margin: auto;
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.summary-container h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 28px;
+  color: #222;
+}
+
+#summaryItems > div {
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+#summaryItems h4 {
+  font-size: 20px;
+  color: #444;
+  margin-bottom: 5px;
+}
+
+#summaryItems p {
+  font-size: 16px;
+  margin: 2px 0;
+  color: #666;
+}
+
+#summaryTotal {
+  font-size: 22px;
+  font-weight: bold;
+  margin-top: 20px;
+  text-align: right;
+  color: #000;
+}
+
+/* Confirm button */
+#confirmOrder {
+  display: block;
+  width: 100%;
+  margin-top: 30px;
+  padding: 12px 0;
+  font-size: 18px;
+  background-color: #ff7f50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+#confirmOrder:hover {
+  background-color: #ff5722;
+}

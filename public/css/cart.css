@@ -157,3 +157,11 @@
 .clear-cart-btn:hover {
   background-color: #e66900;
 }
+
+/* total price cart */
+.cart-total {
+  text-align: right;
+  font-weight: bold;
+  margin: 10px 20px;
+  font-size: 1.1rem;
+}

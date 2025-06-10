@@ -253,7 +253,7 @@
       </div>
     </div>
 
-    <!-- 🛒 Cart Drawer -->
+    <!-- 🛒 Cart Drawer ------------------------------------>
     <div id="cartDrawer" class="cart-drawer">
       <div class="cart-header">
         <h3>Your Cart</h3>
@@ -265,11 +265,13 @@
         <p class="empty-msg">Your cart is empty</p>
         <!-- Cart items will be dynamically inserted here -->
       </div>
+      <!-- ✅ Add this after cart items -->
+      <div id="cartTotal" class="cart-total">Total: $0.00</div>
 
       <!-- Sticky Checkout Button -->
       <div class="cart-footer">
         <button id="clearCartBtn" class="clear-cart-btn">Clear All</button>
-        <button class="checkout-btn">Checkout</button>
+        <button class="checkout-btn" id="checkoutBtn">Checkout</button>
       </div>
     </div>
 
@@ -281,5 +283,6 @@
     <script src="./js/menu.js"></script>
     <script src="./js/model.js"></script>
     <script src="./js/cart.js"></script>
+    <script src="./js/summary.js"></script>
   </body>
 </html>

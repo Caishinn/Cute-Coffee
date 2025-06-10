@@ -88,11 +88,13 @@ document.addEventListener("DOMContentLoaded", () => {
       cartItem.querySelector(".remove-btn").addEventListener("click", () => {
         cartItem.remove();
         updateCartCount();
+        updateCartTotal();
         showEmptyMessageIfNeeded();
       });
     }
 
     updateCartCount();
+    updateCartTotal();
 
     modal.style.display = "none";
     overlay.style.display = "none";
@@ -115,6 +117,20 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     cartCount.textContent = total;
   }
+  // cart total
+  function updateCartTotal() {
+    const items = cartItemsContainer.querySelectorAll(".cart-item");
+    let total = 0;
+    items.forEach((item) => {
+      const priceText =
+        item.querySelector("p:nth-of-type(3)")?.textContent || "";
+      const match = priceText.match(/\$([0-9.]+)/);
+      const price = match ? parseFloat(match[1]) : 0;
+      total += price;
+    });
+    const cartTotal = document.getElementById("cartTotal");
+    if (cartTotal) cartTotal.textContent = `Total: $${total.toFixed(2)}`;
+  }
 
   // ✅ Show empty message if no items
   function showEmptyMessageIfNeeded() {
@@ -133,6 +149,30 @@ document.addEventListener("DOMContentLoaded", () => {
       cartItemsContainer.innerHTML = "";
       updateCartCount();
       showEmptyMessageIfNeeded();
+      updateCartTotal();
     });
   }
+});
+
+document.getElementById("checkoutBtn").addEventListener("click", () => {
+  const cartItems = [];
+  document.querySelectorAll(".cart-item").forEach((item) => {
+    const name = item.querySelector("h4").textContent;
+    const details = item.querySelector("p").textContent;
+    const qty = item.querySelectorAll("p")[1].textContent;
+    const total = item.querySelectorAll("p")[2].textContent;
+
+    cartItems.push({
+      name,
+      details,
+      qty,
+      total,
+    });
+  });
+
+  // Save to localStorage
+  localStorage.setItem("cartSummary", JSON.stringify(cartItems));
+
+  // Redirect
+  window.location.href = "summary.html";
 });

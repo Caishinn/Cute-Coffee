@@ -6,7 +6,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const addButtons = document.querySelectorAll(".add-btn");
   const modalTitle = document.getElementById("modalTitle");
   const modalImage = document.getElementById("modalImage");
-  const addToCartBtn = document.querySelector(".confirm-btn");
 
   const qtyValue = document.getElementById("qtyValue");
   const increaseBtn = document.getElementById("increaseQty");
