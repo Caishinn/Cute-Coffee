@@ -1,5 +1,3 @@
-const cart = [];
-
 document.addEventListener("DOMContentLoaded", () => {
   const modal = document.getElementById("menuModal");
   const overlay = document.getElementById("modalOverlay");
@@ -15,6 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const decreaseBtn = document.getElementById("decreaseQty");
 
   function openModal() {
+    resetModalOptions();
     modal.style.display = "block";
     overlay.style.display = "block";
     document.body.classList.add("no-scroll");
@@ -26,6 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
     modal.style.display = "none";
     overlay.style.display = "none";
     document.body.classList.remove("no-scroll");
+    resetModalOptions();
   }
 
   addButtons.forEach((btn) => {
@@ -78,28 +78,22 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Add to cart
-  addToCartBtn.addEventListener("click", () => {
-    const itemName = modalTitle.textContent;
-    const itemImage = modalImage.src;
-    const sugar =
-      document.querySelector('input[name="sugar"]:checked')?.value || "normal";
-    const size =
-      document.querySelector('input[name="size"]:checked')?.value || "M";
-    const quantity = parseInt(qtyValue.textContent);
-
-    const cartItem = {
-      name: itemName,
-      image: itemImage,
-      sugar,
-      size,
-      quantity,
-    };
-
-    cart.push(cartItem);
-    console.log("✅ Item added to cart:", cartItem);
-    console.log("🛒 Cart contents:", cart);
-
-    closeModal();
-  });
+  // ✅ Remove cart logic from modal.js
 });
+
+function resetModalOptions() {
+  // Reset sugar
+  const sugarOptions = document.querySelectorAll('input[name="sugar"]');
+  sugarOptions.forEach((opt) => {
+    opt.checked = opt.value === "Normal";
+  });
+
+  // Reset size
+  const sizeOptions = document.querySelectorAll('input[name="size"]');
+  sizeOptions.forEach((opt) => {
+    opt.checked = opt.value === "S";
+  });
+
+  // Reset quantity
+  document.getElementById("qtyValue").textContent = "1";
+}

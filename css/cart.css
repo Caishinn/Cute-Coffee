@@ -32,7 +32,7 @@
 .cart-item {
   display: flex;
   gap: 10px;
-  padding: 1rem 1rem;
+  padding: 1.4rem 0.85rem;
   border-bottom: 1px solid #eee;
 }
 
@@ -96,4 +96,27 @@
 }
 .cart-overlay.show {
   display: block;
+}
+
+/* cart count */
+
+.cart-icon-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.cart-count {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  background: red;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
