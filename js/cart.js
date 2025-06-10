@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const closeCartBtn = document.getElementById("closeCart");
   const addToCartBtn = document.querySelector(".confirm-btn");
   const cartItemsContainer = document.getElementById("cartItems");
-  const cartCount = document.getElementById("cartCount"); // 🟡 Added
+  const cartCount = document.getElementById("cartCount");
 
   const modal = document.getElementById("menuModal");
   const overlay = document.getElementById("modalOverlay");
@@ -36,7 +36,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const itemName = document.getElementById("modalTitle").textContent;
     const itemImage = document.getElementById("modalImage").src;
     const sugar = document.querySelector('input[name="sugar"]:checked').value;
-
     const size = document.querySelector('input[name="size"]:checked').value;
     const quantity = parseInt(document.getElementById("qtyValue").textContent);
 
@@ -47,7 +46,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const totalPrice = (itemPrice * quantity).toFixed(2);
 
-    // 🟡 Check if item already exists
     const existingItem = Array.from(
       cartItemsContainer.querySelectorAll(".cart-item")
     ).find((item) => {
@@ -61,7 +59,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     if (existingItem) {
-      // 🟡 Update quantity and total price
       const qtyElem = existingItem.querySelector("p:nth-of-type(2)");
       const priceElem = existingItem.querySelector("p:nth-of-type(3)");
       const currentQty = parseInt(qtyElem.textContent.replace("Qty: ", ""));
@@ -69,7 +66,6 @@ document.addEventListener("DOMContentLoaded", () => {
       qtyElem.textContent = `Qty: ${newQty}`;
       priceElem.textContent = `Total: $${(itemPrice * newQty).toFixed(2)}`;
     } else {
-      // 🟢 New item
       const cartItem = document.createElement("div");
       cartItem.classList.add("cart-item");
       cartItem.innerHTML = `
@@ -81,16 +77,23 @@ document.addEventListener("DOMContentLoaded", () => {
           <p>Size: ${size} | Sugar: ${sugar}</p>
           <p>Qty: ${quantity}</p>
           <p>Total: $${totalPrice}</p>
+          <button class="remove-btn">Remove</button>
         </div>
       `;
       const emptyMsg = cartItemsContainer.querySelector(".empty-msg");
       if (emptyMsg) emptyMsg.remove();
       cartItemsContainer.appendChild(cartItem);
+
+      // 🔴 Add remove functionality
+      cartItem.querySelector(".remove-btn").addEventListener("click", () => {
+        cartItem.remove();
+        updateCartCount();
+        showEmptyMessageIfNeeded();
+      });
     }
 
-    updateCartCount(); // ✅ make sure cart count updates
+    updateCartCount();
 
-    // Close modal
     modal.style.display = "none";
     overlay.style.display = "none";
     document.body.classList.remove("no-scroll");
@@ -100,7 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
   closeCartBtn.addEventListener("click", closeCart);
   cartOverlay.addEventListener("click", closeCart);
 
-  // 🟡 Function to update cart count
+  // ✅ Update cart count
   function updateCartCount() {
     const items = cartItemsContainer.querySelectorAll(".cart-item");
     let total = 0;
@@ -111,5 +114,25 @@ document.addEventListener("DOMContentLoaded", () => {
       total += qty;
     });
     cartCount.textContent = total;
+  }
+
+  // ✅ Show empty message if no items
+  function showEmptyMessageIfNeeded() {
+    if (cartItemsContainer.children.length === 0) {
+      const msg = document.createElement("p");
+      msg.classList.add("empty-msg");
+      msg.textContent = "Your cart is empty.";
+      cartItemsContainer.appendChild(msg);
+    }
+  }
+
+  // ✅ Clear all button
+  const clearBtn = document.getElementById("clearCartBtn");
+  if (clearBtn) {
+    clearBtn.addEventListener("click", () => {
+      cartItemsContainer.innerHTML = "";
+      updateCartCount();
+      showEmptyMessageIfNeeded();
+    });
   }
 });
