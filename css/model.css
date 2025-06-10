@@ -15,7 +15,6 @@
   top: 50%;
   left: 50%;
   width: 90%;
-  min-height: 75vh;
   max-width: 400px;
   background: #fff;
   border-radius: 10px;
@@ -29,7 +28,7 @@
 .modal-content {
   display: flex;
   flex-direction: column;
-  max-height: 80vh;
+  max-height: 75vh;
   position: relative;
   overflow: hidden;
   padding-bottom: 80px; /* space for sticky buttons */
@@ -37,19 +36,20 @@
 
 /* Make the content scrollable except the buttons */
 .modal-body {
+  max-height: 70vh;
   overflow-y: auto;
-  flex: 1;
-  padding-right: 4px; /* optional: keep scrollbar from overlapping */
+  padding-right: 4px; /* prevent scrollbar overlap */
 }
 .modal-actions {
   position: absolute;
-  bottom: 20px;
+  bottom: 10px;
   left: 20px;
   right: 20px;
-
+  gap: 10px;
   display: flex;
   justify-content: space-between;
   padding-top: 10px;
+  align-items: center;
 }
 .menu-modal img {
   width: 100%;

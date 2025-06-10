@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Furniture | Shopping Cart</title>
 
-    <!-- Link Css-->
+    <!-- Link CSS -->
     <link rel="stylesheet" href="./css/style.css" />
     <link rel="stylesheet" href="./css/menu.css" />
     <link rel="stylesheet" href="./css/model.css" />
@@ -20,26 +20,21 @@
     />
   </head>
   <body>
+    <!-- 🌐 Navbar -->
     <header class="navbar">
-      <!-- Hamburger icon for mobile -->
       <div class="hamburger" id="hamburger">
         <i class="fas fa-bars"></i>
       </div>
-
-      <!-- Desktop logo -->
       <div class="logo desktop-only">
         <span class="logo-circle">F</span>
         <span class="logo-text">Furniture.</span>
       </div>
-
-      <!-- Desktop navigation -->
       <nav class="nav-links">
         <a href="#">Home</a>
         <a href="#">Menu</a>
         <a href="#">About Us</a>
         <a href="#">Contact Us</a>
       </nav>
-
       <div class="nav-icons">
         <i class="fas fa-search"></i>
         <i class="fas fa-heart"></i>
@@ -47,7 +42,7 @@
       </div>
     </header>
 
-    <!-- Mobile Sidebar Menu -->
+    <!-- 📱 Mobile Sidebar -->
     <div class="mobile-menu" id="mobileMenu">
       <div class="mobile-menu-header">
         <div class="logo">
@@ -62,19 +57,20 @@
       <a href="#">Contact Us</a>
     </div>
 
-    <!-- 🔥 Overlay background -->
+    <!-- 🔲 Overlay -->
     <div class="overlay" id="overlay"></div>
 
-    <!-- Breadcrumb Section -->
+    <!-- 🧭 Breadcrumb -->
     <section class="breadcrumb-section">
       <h1>Shopping Cart</h1>
       <p>Home / Shopping Cart</p>
     </section>
 
+    <!-- 📋 Menu Grid -->
     <section class="menu-section">
       <h2 class="menu-title">Our Café Menu</h2>
       <div class="menu-grid">
-        <!-- Menu Item -->
+        <!-- Menu Item Template (repeat as needed) -->
         <div class="menu-item">
           <img src="./cafe-image/image.png" alt="Latte" />
           <div class="menu-details">
@@ -87,70 +83,65 @@
         </div>
 
         <div class="menu-item">
-          <img src="./cafe-image/image.png" alt="Latte" />
+          <img src="./cafe-image/image.png" alt="Cappuccino" />
           <div class="menu-details">
-            <h3>Latte</h3>
+            <h3>Cappuccino</h3>
             <div class="menu-footer">
-              <p>$3.50</p>
+              <p>$3.80</p>
               <button class="add-btn"><i class="fas fa-plus"></i></button>
             </div>
           </div>
         </div>
 
         <div class="menu-item">
-          <img src="./cafe-image/image.png" alt="Latte" />
+          <img src="./cafe-image/image.png" alt="Mocha" />
           <div class="menu-details">
-            <h3>Latte</h3>
+            <h3>Mocha</h3>
             <div class="menu-footer">
-              <p>$3.50</p>
+              <p>$4.00</p>
               <button class="add-btn"><i class="fas fa-plus"></i></button>
             </div>
           </div>
         </div>
 
         <div class="menu-item">
-          <img src="./cafe-image/image.png" alt="Latte" />
+          <img src="./cafe-image/image.png" alt="Americano" />
           <div class="menu-details">
-            <h3>Latte</h3>
+            <h3>Americano</h3>
             <div class="menu-footer">
-              <p>$3.50</p>
+              <p>$3.20</p>
               <button class="add-btn"><i class="fas fa-plus"></i></button>
             </div>
           </div>
         </div>
 
         <div class="menu-item">
-          <img src="./cafe-image/image.png" alt="Latte" />
+          <img src="./cafe-image/image.png" alt="Espresso" />
           <div class="menu-details">
-            <h3>Latte</h3>
+            <h3>Espresso</h3>
             <div class="menu-footer">
-              <p>$3.50</p>
+              <p>$2.50</p>
               <button class="add-btn"><i class="fas fa-plus"></i></button>
             </div>
           </div>
         </div>
 
-        <div class="menu-item">
-          <img src="./cafe-image/image.png" alt="Latte" />
-          <div class="menu-details">
-            <h3>Latte</h3>
-            <div class="menu-footer">
-              <p>$3.50</p>
-              <button class="add-btn"><i class="fas fa-plus"></i></button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Add more items as needed -->
+        <!-- Duplicate items for testing scrolling -->
+        <!-- ... -->
       </div>
     </section>
 
-    <!-- Overlay & Modal -->
+    <!-- 🧊 Modal Overlay -->
     <div class="modal-overlay" id="modalOverlay"></div>
+
+    <!-- 📝 Modal -->
     <div class="menu-modal" id="menuModal">
       <div class="modal-content">
+        <!-- Close button (always visible) -->
+        <span class="close-modal" id="closeModal">&times;</span>
+
+        <!-- Scrollable content -->
         <div class="modal-body">
-          <span class="close-modal" id="closeModal">&times;</span>
           <img id="modalImage" src="" alt="Item Image" />
           <h3 id="modalTitle">Item Name</h3>
 
@@ -194,7 +185,7 @@
           </div>
         </div>
 
-        <!-- Sticky Buttons -->
+        <!-- Sticky Modal Buttons -->
         <div class="modal-actions">
           <button class="cancel-btn" id="cancelModal">Cancel</button>
           <button class="confirm-btn">Add to Cart</button>
@@ -208,17 +199,23 @@
         <h3>Your Cart</h3>
         <span class="close-cart" id="closeCart">&times;</span>
       </div>
+
+      <!-- Scrollable Cart Items -->
       <div class="cart-items" id="cartItems">
         <p class="empty-msg">Your cart is empty</p>
+        <!-- Cart items will be dynamically inserted here -->
       </div>
+
+      <!-- Sticky Checkout Button -->
       <div class="cart-footer">
         <button class="checkout-btn">Checkout</button>
       </div>
     </div>
+
+    <!-- Cart Overlay -->
     <div id="cartOverlay" class="cart-overlay"></div>
 
-    <!--Link JS-->
-
+    <!-- 🔌 Scripts -->
     <script src="./js/main.js"></script>
     <script src="./js/menu.js"></script>
     <script src="./js/model.js"></script>

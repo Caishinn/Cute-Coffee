@@ -32,9 +32,36 @@ document.addEventListener("DOMContentLoaded", () => {
     const size = document.querySelector('input[name="size"]:checked').value;
     const quantity = parseInt(document.getElementById("qtyValue").textContent);
 
-    const cartItem = document.createElement("div");
-    cartItem.classList.add("cart-item");
-    cartItem.innerHTML = `
+    // Remove empty message if present
+    const emptyMsg = cartItemsContainer.querySelector(".empty-msg");
+    if (emptyMsg) emptyMsg.remove();
+
+    // Check if same item already exists
+    const existingItems = cartItemsContainer.querySelectorAll(".cart-item");
+    let itemFound = false;
+
+    existingItems.forEach((item) => {
+      const name = item.querySelector("h4").textContent;
+      const options = item.querySelector("p").textContent;
+
+      if (
+        name === itemName &&
+        options.includes(`Size: ${size}`) &&
+        options.includes(`Sugar: ${sugar}`)
+      ) {
+        const qtyElement = item.querySelectorAll("p")[1];
+        const currentQty = parseInt(
+          qtyElement.textContent.replace("Qty: ", "")
+        );
+        qtyElement.textContent = `Qty: ${currentQty + quantity}`;
+        itemFound = true;
+      }
+    });
+
+    if (!itemFound) {
+      const cartItem = document.createElement("div");
+      cartItem.classList.add("cart-item");
+      cartItem.innerHTML = `
         <div class="cart-item-img">
           <img src="${itemImage}" alt="${itemName}" />
         </div>
@@ -44,12 +71,8 @@ document.addEventListener("DOMContentLoaded", () => {
           <p>Qty: ${quantity}</p>
         </div>
       `;
-
-    // Remove empty message if present
-    const emptyMsg = cartItemsContainer.querySelector(".empty-msg");
-    if (emptyMsg) emptyMsg.remove();
-
-    cartItemsContainer.appendChild(cartItem);
+      cartItemsContainer.appendChild(cartItem);
+    }
 
     // Close modal
     modal.style.display = "none";
