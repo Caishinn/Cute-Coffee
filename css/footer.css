@@ -90,7 +90,7 @@
 
 .map-container {
   margin-top: 10px;
-  width: 350px;
+  width: auto;
   border-radius: none;
   overflow: hidden;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);

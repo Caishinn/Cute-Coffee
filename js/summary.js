@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
     itemEl.classList.add("summary-item");
 
     itemEl.innerHTML = `
-      <p><strong>${item.name}</strong></p>
+      <h1><strong>${item.name}</strong></h1>
       <p>${item.details}</p>
       <p>${item.qty}</p>
       <p>${item.total}</p>

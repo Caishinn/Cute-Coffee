@@ -35,3 +35,12 @@ document.addEventListener(
   },
   { passive: false }
 );
+
+// Optional: Add shadow effect if scrollable
+const summaryWrapper = document.querySelector(".summary-list-wrapper");
+summaryWrapper.addEventListener("scroll", () => {
+  summaryWrapper.style.boxShadow =
+    summaryWrapper.scrollTop > 0
+      ? "inset 0 8px 8px -8px rgba(0,0,0,0.1)"
+      : "none";
+});
