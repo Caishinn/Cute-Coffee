@@ -2,7 +2,12 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--Zoom disable-->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+    />
+
     <title>Furniture | Shopping Cart</title>
 
     <!-- Link CSS -->
@@ -50,8 +55,8 @@
     <div class="mobile-menu" id="mobileMenu">
       <div class="mobile-menu-header">
         <div class="logo">
-          <span class="logo-circle">F</span>
-          <span class="logo-text">Furniture.</span>
+          <span class="logo-circle">TT</span>
+          <span class="logo-text">MeowCoffee.</span>
         </div>
         <span class="close-icon" id="closeMenu">&times;</span>
       </div>
@@ -66,8 +71,8 @@
 
     <!-- 🧭 Breadcrumb -->
     <section class="breadcrumb-section">
-      <h1>Shopping Cart</h1>
-      <p>Home / Shopping Cart</p>
+      <h1>Welcome</h1>
+      <p>To My Coffee shop, please enojoy your drink.</p>
     </section>
 
     <!-- 📋 Menu Grid ----------------------------------------------------->
@@ -209,17 +214,16 @@
           <div class="option-group">
             <label>Sugar:</label>
             <div class="options">
-              <label
-                ><input type="radio" name="sugar" value="No" /> No Sugar</label
-              >
-              <label
-                ><input type="radio" name="sugar" value="Normal" />
-                Normal</label
-              >
-              <label
-                ><input type="radio" name="sugar" value="Less" /> Less
-                Sugar</label
-              >
+              <label>
+                <input type="radio" name="sugar" value="No Sugar" /> No Sugar
+              </label>
+              <label>
+                <input type="radio" name="sugar" value="Normal" /> Normal
+              </label>
+              <label>
+                <input type="radio" name="sugar" value="Less Sugar" /> Less
+                Sugar
+              </label>
             </div>
           </div>
 
@@ -227,10 +231,12 @@
           <div class="option-group">
             <label>Size:</label>
             <div class="options">
-              <label
-                ><input type="radio" name="size" value="S" checked /> S</label
-              >
-              <label><input type="radio" name="size" value="M" /> M</label>
+              <label>
+                <input type="radio" name="size" value="S" /> Small
+              </label>
+              <label>
+                <input type="radio" name="size" value="M" /> Medium
+              </label>
             </div>
           </div>
 

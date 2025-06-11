@@ -2,18 +2,60 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no"
+    />
     <title>Order Summary</title>
-
-    <!-- Link CSS -->
-    <link rel="stylesheet" href="./css/style.css" />
     <link rel="stylesheet" href="./css/summary.css" />
+    <link rel="stylesheet" href="./css/style.css" />
   </head>
   <body>
-    <div class="summary-container">
-      <h2>Order Summary</h2>
-      <div id="summaryItems"></div>
-      <h3 id="summaryTotal">Total: $0.00</h3>
-      <button id="confirmOrder">Confirm Order</button>
+    <!-- 🧭 Breadcrumb Header -->
+    <header class="breadcrumb-section">
+      <!-- 🧭 Breadcrumb -->
+      <section class="breadcrumb-section">
+        <h1>Order Summary</h1>
+        <div class="breadcrumb">
+          <a href="index.html" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-divider">/</span>
+          <span class="breadcrumb-current">Order Summary</span>
+        </div>
+      </section>
+      <!--div class="breadcrumb-container">
+        <button onclick="history.back()" class="back-btn">← Back</button>
+      </div-->
+    </header>
+
+    <!-- Main Content -->
+    <div class="summary-wrapper">
+      <!-- Payment Section -->
+      <div class="payment-section">
+        <h2 class="section-title">Payment</h2>
+
+        <div class="form-group">
+          <label for="nameInput">Your Name</label>
+          <input type="text" id="nameInput" placeholder="Enter your name" />
+        </div>
+
+        <div class="form-group">
+          <label>Payment Method</label>
+          <div class="payment-method">QR Code</div>
+        </div>
+
+        <div class="qr-container">
+          <img src="./image/USD_QR_CODE.jpeg" alt="QR Code" class="qr-code" />
+          <p class="qr-note">Scan the QR code to complete payment</p>
+        </div>
+      </div>
+
+      <!-- Order Summary Section -->
+      <div class="order-summary">
+        <h2 class="section-title">Your Order</h2>
+        <div id="summaryItems" class="summary-list"></div>
+        <div class="grand-total" id="grandTotal">Total: $0.00</div>
+        <button id="confirmBtn" class="confirm-btn">Confirm & Pay</button>
+      </div>
     </div>
 
     <script src="./js/summary.js"></script>

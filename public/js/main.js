@@ -20,3 +20,18 @@ overlay.addEventListener("click", () => {
   mobileMenu.classList.remove("open");
   overlay.classList.remove("active");
 });
+
+// zoom disable
+
+let lastTouch = 0;
+document.addEventListener(
+  "touchstart",
+  (e) => {
+    const now = Date.now();
+    if (now - lastTouch <= 300) {
+      e.preventDefault(); // prevent double-tap zoom
+    }
+    lastTouch = now;
+  },
+  { passive: false }
+);

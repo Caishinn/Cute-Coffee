@@ -32,7 +32,7 @@
 .cart-item {
   display: flex;
   gap: 16px;
-  padding: 1.4rem 0.85rem;
+  padding: 1rem 0 0 0.7rem;
   border-bottom: 1px solid #eee;
 }
 
@@ -123,12 +123,12 @@
 
 /* remove button cart item */
 .cart-item .remove-btn {
-  margin-top: 8px;
-  padding: 6px 12px;
+  margin: 10px 16px;
+  padding: 6px 6px;
   background-color: #ff4d4f;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
   font-size: 0.9rem;
   transition: background-color 0.2s ease;
@@ -162,6 +162,48 @@
 .cart-total {
   text-align: right;
   font-weight: bold;
-  margin: 10px 20px;
-  font-size: 1.1rem;
+  margin: 40px 20px 12px;
+  font-size: 1.15rem;
 }
+
+/* Qty in drawer*/
+
+/* Container holding quantity controls */
+.qty-control {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 12px 0;
+}
+
+/* Qty number display */
+.qty-display {
+  min-width: 32px;
+  text-align: center;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+/* Increase/Decrease buttons */
+.increase-btn,
+.decrease-btn {
+  background-color: #1d1c1c;
+  color: #fff;
+  border: none;
+  width: 24px;
+  height: 24px;
+  font-size: 18px;
+  font-weight: 300;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+/* Hover effect 
+.increase-btn:hover,
+.decrease-btn:hover {
+  background-color: #ccc;
+}*/

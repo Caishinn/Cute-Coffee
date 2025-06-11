@@ -5,6 +5,11 @@
   box-sizing: border-box;
   font-family: "Inter", sans-serif;
 }
+/* Zoom Disable */
+html,
+body {
+  touch-action: manipulation; /* Prevents double-tap zoom in most browsers */
+}
 
 body {
   background-color: #f9f9f9;
@@ -126,13 +131,13 @@ body {
 /* === BREADCRUMB === */
 .breadcrumb-section {
   background-color: #f0f0f0;
-  padding: 60px;
+  padding: 50px;
   text-align: center;
 }
 
 .breadcrumb-section h1 {
-  font-size: 36px;
-  margin-bottom: 10px;
+  font-size: 28px;
+  margin-bottom: 16px;
   font-weight: 600;
 }
 

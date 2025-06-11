@@ -59,11 +59,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     if (existingItem) {
-      const qtyElem = existingItem.querySelector("p:nth-of-type(2)");
-      const priceElem = existingItem.querySelector("p:nth-of-type(3)");
-      const currentQty = parseInt(qtyElem.textContent.replace("Qty: ", ""));
+      const qtyElem = existingItem.querySelector(".qty-display");
+      const priceElem = existingItem.querySelector(".total-display");
+      const currentQty = parseInt(qtyElem.textContent);
       const newQty = currentQty + quantity;
-      qtyElem.textContent = `Qty: ${newQty}`;
+      qtyElem.textContent = newQty;
       priceElem.textContent = `Total: $${(itemPrice * newQty).toFixed(2)}`;
     } else {
       const cartItem = document.createElement("div");
@@ -75,21 +75,54 @@ document.addEventListener("DOMContentLoaded", () => {
         <div class="cart-item-details">
           <h4>${itemName}</h4>
           <p>Size: ${size} | Sugar: ${sugar}</p>
-          <p>Qty: ${quantity}</p>
-          <p>Total: $${totalPrice}</p>
-          <button class="remove-btn">Remove</button>
+        
+          <p class="total-display">Total: $${totalPrice}</p>
+            <div class="qty-control">
+            <button class="decrease-btn">−</button>
+            <span class="qty-display">${quantity}</span>
+            <button class="increase-btn">+</button>
+            <button class="remove-btn">Remove</button>
+          </div>
+          
         </div>
       `;
+
       const emptyMsg = cartItemsContainer.querySelector(".empty-msg");
       if (emptyMsg) emptyMsg.remove();
       cartItemsContainer.appendChild(cartItem);
 
-      // 🔴 Add remove functionality
+      // Remove functionality
       cartItem.querySelector(".remove-btn").addEventListener("click", () => {
         cartItem.remove();
         updateCartCount();
         updateCartTotal();
         showEmptyMessageIfNeeded();
+      });
+
+      // Quantity buttons
+      const qtyDisplay = cartItem.querySelector(".qty-display");
+      const increaseBtn = cartItem.querySelector(".increase-btn");
+      const decreaseBtn = cartItem.querySelector(".decrease-btn");
+      const totalElem = cartItem.querySelector(".total-display");
+
+      increaseBtn.addEventListener("click", () => {
+        let qty = parseInt(qtyDisplay.textContent);
+        qty++;
+        qtyDisplay.textContent = qty;
+        totalElem.textContent = `Total: $${(itemPrice * qty).toFixed(2)}`;
+        updateCartCount();
+        updateCartTotal();
+      });
+
+      decreaseBtn.addEventListener("click", () => {
+        let qty = parseInt(qtyDisplay.textContent);
+        if (qty > 1) {
+          qty--;
+          qtyDisplay.textContent = qty;
+          totalElem.textContent = `Total: $${(itemPrice * qty).toFixed(2)}`;
+          updateCartCount();
+          updateCartTotal();
+        }
       });
     }
 
@@ -105,25 +138,24 @@ document.addEventListener("DOMContentLoaded", () => {
   closeCartBtn.addEventListener("click", closeCart);
   cartOverlay.addEventListener("click", closeCart);
 
-  // ✅ Update cart count
+  // Update cart count
   function updateCartCount() {
     const items = cartItemsContainer.querySelectorAll(".cart-item");
     let total = 0;
     items.forEach((item) => {
-      const qtyText = item.querySelector("p:nth-of-type(2)")?.textContent || "";
-      const match = qtyText.match(/Qty:\s*(\d+)/);
-      const qty = match ? parseInt(match[1], 10) : 0;
+      const qtyText = item.querySelector(".qty-display")?.textContent || "0";
+      const qty = parseInt(qtyText, 10);
       total += qty;
     });
     cartCount.textContent = total;
   }
-  // cart total
+
+  // Update total price
   function updateCartTotal() {
     const items = cartItemsContainer.querySelectorAll(".cart-item");
     let total = 0;
     items.forEach((item) => {
-      const priceText =
-        item.querySelector("p:nth-of-type(3)")?.textContent || "";
+      const priceText = item.querySelector(".total-display")?.textContent || "";
       const match = priceText.match(/\$([0-9.]+)/);
       const price = match ? parseFloat(match[1]) : 0;
       total += price;
@@ -132,7 +164,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (cartTotal) cartTotal.textContent = `Total: $${total.toFixed(2)}`;
   }
 
-  // ✅ Show empty message if no items
+  // Show empty message
   function showEmptyMessageIfNeeded() {
     if (cartItemsContainer.children.length === 0) {
       const msg = document.createElement("p");
@@ -142,25 +174,26 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // ✅ Clear all button
+  // Clear all button
   const clearBtn = document.getElementById("clearCartBtn");
   if (clearBtn) {
     clearBtn.addEventListener("click", () => {
       cartItemsContainer.innerHTML = "";
       updateCartCount();
-      showEmptyMessageIfNeeded();
       updateCartTotal();
+      showEmptyMessageIfNeeded();
     });
   }
 });
 
+// Checkout handler
 document.getElementById("checkoutBtn").addEventListener("click", () => {
   const cartItems = [];
   document.querySelectorAll(".cart-item").forEach((item) => {
     const name = item.querySelector("h4").textContent;
     const details = item.querySelector("p").textContent;
-    const qty = item.querySelectorAll("p")[1].textContent;
-    const total = item.querySelectorAll("p")[2].textContent;
+    const qty = item.querySelector(".qty-display").textContent;
+    const total = item.querySelector(".total-display").textContent;
 
     cartItems.push({
       name,
@@ -170,9 +203,6 @@ document.getElementById("checkoutBtn").addEventListener("click", () => {
     });
   });
 
-  // Save to localStorage
   localStorage.setItem("cartSummary", JSON.stringify(cartItems));
-
-  // Redirect
   window.location.href = "summary.html";
 });

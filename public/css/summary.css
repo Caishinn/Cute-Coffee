@@ -1,75 +1,215 @@
-/* Basic Reset */
+/* Global Reset */
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
   font-family: "Segoe UI", sans-serif;
 }
 
 body {
-  background-color: #f8f8f8;
+  background: #f5f5f5;
   color: #333;
-  padding: 40px 20px;
 }
 
-/* Summary container */
-.summary-container {
-  max-width: 600px;
-  margin: auto;
-  background: white;
-  padding: 30px;
+/* Breadcrumb Header */
+.breadcrumb-section {
+  background: #fff;
+  margin: -20px 0;
+}
+
+.breadcrumb-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.back-btn {
+  background: transparent;
+  border: none;
+  font-size: 1rem;
+  color: #555;
+  cursor: pointer;
+  margin-bottom: 0.5rem;
+}
+
+.breadcrumb {
+  /*display: flex;*/
+  align-items: center;
+  font-size: 0.95rem;
+  color: #888;
+}
+
+.breadcrumb-link {
+  text-decoration: none;
+  color: #888;
+  text-decoration: underline;
+  font-size: 14px;
+}
+
+.breadcrumb-divider {
+  margin: 0 0.5rem;
+}
+
+.breadcrumb-current {
+  color: #000;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+/* Main Layout */
+.summary-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 2rem;
+  justify-content: center;
+}
+
+/* Payment Section */
+.payment-section,
+.order-summary {
+  flex: 1 1 320px;
+  max-width: 480px;
+  background: #fff;
+  padding: 2rem;
   border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+}
+/* Update order-summary layout */
+.order-summary {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  max-height: 600px;
+  position: relative;
 }
 
-.summary-container h2 {
-  text-align: center;
-  margin-bottom: 25px;
-  font-size: 28px;
-  color: #222;
-}
-
-#summaryItems > div {
-  margin-bottom: 20px;
-  padding-bottom: 10px;
+/* Scrollable item list */
+.summary-list {
+  overflow-y: auto;
+  max-height: 300px;
+  padding-right: 0.5rem;
+  margin-bottom: 1rem;
+  border-top: 1px solid #eee;
   border-bottom: 1px solid #eee;
 }
 
-#summaryItems h4 {
-  font-size: 20px;
-  color: #444;
-  margin-bottom: 5px;
+.section-title {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
-#summaryItems p {
-  font-size: 16px;
-  margin: 2px 0;
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #444;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fafafa;
+  transition: border 0.2s ease;
+}
+
+input[type="text"]:focus {
+  outline: none;
+  border-color: #333;
+  background-color: #fff;
+}
+
+.payment-method {
+  background: #f1f1f1;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-weight: 500;
+  color: #222;
+}
+
+.qr-container {
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+.qr-code {
+  width: 180px;
+  height: auto;
+  border-radius: 8px;
+}
+
+.qr-note {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
   color: #666;
 }
 
-#summaryTotal {
-  font-size: 22px;
+/* Order Summary */
+.summary-list {
+  margin-bottom: 1.5rem;
+}
+
+.summary-item {
+  border-bottom: 1px solid #eee;
+  padding: 0.75rem 0;
+}
+
+.grand-total {
+  font-size: 1.2rem;
   font-weight: bold;
-  margin-top: 20px;
-  text-align: right;
-  color: #000;
+  margin-bottom: 1.5rem;
 }
 
-/* Confirm button */
-#confirmOrder {
-  display: block;
-  width: 100%;
-  margin-top: 30px;
-  padding: 12px 0;
-  font-size: 18px;
-  background-color: #ff7f50;
-  color: white;
+/* Fixed confirm button at bottom */
+.confirm-btn {
+  position: sticky;
+  bottom: 0;
+  background-color: #333;
+  color: #fff;
   border: none;
+  padding: 0.75rem 1rem;
   border-radius: 8px;
+  width: 100%;
+  font-size: 1rem;
   cursor: pointer;
-  transition: background 0.3s ease;
+  margin-top: 1rem;
+  z-index: 2;
+  transition: background 0.3s;
 }
 
-#confirmOrder:hover {
-  background-color: #ff5722;
+.confirm-btn:hover {
+  background-color: #000;
+}
+/* For mobile, reduce order summary height a bit */
+@media (max-width: 768px) {
+  .order-summary {
+    max-height: none;
+  }
+
+  .summary-list {
+    max-height: 200px;
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .summary-wrapper {
+    flex-direction: column;
+    padding: 1rem;
+    margin: 1rem 0;
+  }
+
+  .payment-section,
+  .order-summary {
+    max-width: 100%;
+    padding: 1.5rem;
+  }
 }

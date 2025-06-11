@@ -57,7 +57,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Enable manual typing
   qtyValue.addEventListener("click", () => {
     qtyValue.setAttribute("contenteditable", "true");
     qtyValue.focus();
@@ -76,23 +75,22 @@ document.addEventListener("DOMContentLoaded", () => {
       qtyValue.blur();
     }
   });
-
-  // ✅ Remove cart logic from modal.js
 });
 
 function resetModalOptions() {
-  // Reset sugar
+  // Reset sugar option to "Normal"
   const sugarOptions = document.querySelectorAll('input[name="sugar"]');
   sugarOptions.forEach((opt) => {
     opt.checked = opt.value === "Normal";
   });
 
-  // Reset size
+  // Reset size option to "S"
   const sizeOptions = document.querySelectorAll('input[name="size"]');
   sizeOptions.forEach((opt) => {
     opt.checked = opt.value === "S";
   });
 
   // Reset quantity
-  document.getElementById("qtyValue").textContent = "1";
+  const qty = document.getElementById("qtyValue");
+  if (qty) qty.textContent = "1";
 }
