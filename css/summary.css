@@ -98,7 +98,14 @@ body {
   max-height: 60vh;
   padding-right: 6px;
 }
-
+/* Item list styling */
+.summary-list > div {
+  background: #f6f6f6;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
 .summary-item:last-child {
   border-bottom: none;
 }
@@ -190,7 +197,6 @@ input[type="text"]:focus {
   bottom: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
 }
 
 .grand-total {
@@ -199,29 +205,44 @@ input[type="text"]:focus {
   margin: 1.2rem 0;
 }
 
-/* Fixed confirm button at bottom */
+/* Confirm button */
 .confirm-btn {
-  background-color: #333;
-  color: white;
+  width: 100%;
+  margin-top: 10px;
+  padding: 14px;
+  font-size: 16px;
   border: none;
-  padding: 0.8rem;
+  background-color: #000;
+  color: #fff;
   border-radius: 8px;
-  font-size: 1rem;
   cursor: pointer;
-  transition: background 0.2s;
 }
 
 .confirm-btn:hover {
   background-color: #555;
 }
-/* For mobile, reduce order summary height a bit */
+
+/* 📱 Mobile & tablet: remove scroll on summary box */
 @media (max-width: 768px) {
-  .order-summary {
-    max-height: none;
+  .summary-list-wrapper {
+    max-height: unset;
+    overflow: visible;
   }
 
-  .summary-list {
-    max-height: 200px;
+  .order-summary {
+    height: auto;
+    max-height: unset;
+  }
+
+  body {
+    overflow-x: hidden;
+  }
+  .confirm-btn {
+    position: static;
+    margin: 1rem 0 2.5rem;
+  }
+  .order-summary {
+    max-height: none;
   }
 }
 
