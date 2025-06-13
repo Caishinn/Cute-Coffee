@@ -115,7 +115,8 @@
 }
 .filter-btn {
   padding: 0.5rem 1rem;
-  background-color: #eee;
+  background-color: #f6f6f6;
+  color: #979797;
   border: none;
   border-radius: 8px;
   cursor: pointer;
