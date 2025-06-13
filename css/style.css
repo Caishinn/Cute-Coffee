@@ -210,16 +210,32 @@ body {
 
 .menu-search {
   text-align: center;
-  margin: 0 0 2rem 0;
+  padding: 0 0 2rem 0;
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  margin: auto;
 }
 
 .menu-search-input {
   width: 100%;
   max-width: 400px;
-  padding: 8px 12px;
+  padding: 8px 32px;
   font-size: 1rem;
   border: 1px solid #ccc;
   border-radius: 8px;
+  outline: none;
+}
+
+.clear-icon {
+  position: absolute;
+  right: 10px;
+  top: 25%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: #aaa;
+  cursor: pointer;
+  display: none;
 }
 
 /* === RESPONSIVE === */
