@@ -86,13 +86,37 @@
     <!-- 📋 Menu Grid ----------------------------------------------------->
     <section class="menu-section">
       <h2 class="menu-title">Our Café Menu</h2>
-      <div class="menu-search">
+      <div class="menu-search" style="position: relative">
         <input
           type="text"
           id="menuSearchInput"
           placeholder="Search menu items..."
           class="menu-search-input"
         />
+        <i
+          id="searchIcon"
+          class="fas fa-search"
+          style="
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #888;
+          "
+        ></i>
+        <i
+          id="clearSearch"
+          class="fas fa-times"
+          style="
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #888;
+            display: none;
+            cursor: pointer;
+          "
+        ></i>
       </div>
 
       <div class="menu-filters" id="filterBar">
