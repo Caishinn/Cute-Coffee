@@ -28,7 +28,7 @@
   </head>
   <body>
     <!-- 🌐 Navbar -------------------------------------------->
-    <!-- 🌐 Navbar -------------------------------------------->
+
     <header class="navbar">
       <div class="hamburger" id="hamburger">
         <i class="fas fa-bars"></i>
@@ -44,7 +44,13 @@
         <a href="#">Contact Us</a>
       </nav>
       <div class="nav-icons">
-        <i class="fas fa-search"></i>
+        <!--i class="fas fa-search" id="searchIcon"></i>
+        <input
+          type="text"
+          class="search-input hidden"
+          id="searchInput"
+          placeholder="Search menu..."
+        /-->
         <i class="fas fa-heart"></i>
         <div class="cart-icon-wrapper">
           <i class="fas fa-shopping-cart"></i>
@@ -80,18 +86,29 @@
     <!-- 📋 Menu Grid ----------------------------------------------------->
     <section class="menu-section">
       <h2 class="menu-title">Our Café Menu</h2>
+      <div class="menu-search">
+        <input
+          type="text"
+          id="menuSearchInput"
+          placeholder="Search menu items..."
+          class="menu-search-input"
+        />
+      </div>
+
       <div class="menu-filters" id="filterBar">
         <button class="filter-btn active" data-category="all">All</button>
+        <button class="filter-btn" data-category="best-seller">
+          Best Seller
+        </button>
         <button class="filter-btn" data-category="coffee">Coffee</button>
         <button class="filter-btn" data-category="tea">Tea</button>
         <button class="filter-btn" data-category="smoothie">Smoothie</button>
-        <button class="filter-btn" data-category="others">Others</button>
       </div>
       <div class="menu-grid">
         <!-- Menu Item Template (repeat as needed) -->
 
         <!-- Latte-->
-        <div class="menu-item" data-category="coffee">
+        <div class="menu-item" data-category="coffee best-seller">
           <img src="./cafe-image/image.png" alt="Latte" />
           <div class="menu-details">
             <h3>Latte</h3>
@@ -334,5 +351,21 @@
     <script src="./js/cart.js"></script>
     <script src="./js/summary.js"></script>
     <script src="./js/promotion.js"></script>
+
+    <!-- Search Bar>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const searchIcon = document.getElementById("searchIcon");
+        const searchInput = document.getElementById("searchInput");
+
+        searchIcon.addEventListener("click", function () {
+          searchInput.classList.toggle("hidden");
+          if (!searchInput.classList.contains("hidden")) {
+            searchInput.focus();
+          }
+        });
+      });
+    </script-->
   </body>
 </html>

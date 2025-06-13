@@ -195,6 +195,33 @@ body {
   pointer-events: all;
 }
 
+/* search 
+
+.search-input {
+  padding: 5px 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-left: 10px;
+}
+
+.hidden {
+  display: none;
+}*/
+
+.menu-search {
+  text-align: center;
+  margin: 0 0 2rem 0;
+}
+
+.menu-search-input {
+  width: 100%;
+  max-width: 400px;
+  padding: 8px 12px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
 /* === RESPONSIVE === */
 @media (max-width: 768px) {
   .nav-links,

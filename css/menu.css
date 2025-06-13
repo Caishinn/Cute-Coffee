@@ -14,10 +14,11 @@
 
 .menu-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 20px;
   max-width: 1000px;
   margin: 0 auto;
+  justify-content: center;
 }
 
 .menu-item {
@@ -30,6 +31,8 @@
   align-items: center;
   position: relative;
   transition: transform 0.2s ease;
+  width: 100%;
+  max-width: 235px; /* Prevents stretching too wide */
 }
 
 .menu-item:hover {
