@@ -196,10 +196,8 @@ document.getElementById("checkoutBtn").addEventListener("click", () => {
     const totalText = item.querySelector(".total-display").textContent;
     const total = parseFloat(totalText.replace("Total: $", ""));
 
-    // Safe size/sugar parse
     let size = "Unknown";
     let sugar = "Unknown";
-
     const matches = details.match(/Size:\s*(.*?)\s*\|\s*Sugar:\s*(.*)/);
     if (matches) {
       size = matches[1];
@@ -213,6 +211,7 @@ document.getElementById("checkoutBtn").addEventListener("click", () => {
       sugar,
       price: total / qty,
       total: `$${total.toFixed(2)}`,
+      details, // ✅ Save full description
     });
   });
 
