@@ -1,0 +1,37 @@
+.nav-icons {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav-icon {
+  position: relative;
+  font-size: 1.25rem;
+  color: #333;
+  padding: 8px;
+  border-radius: 50%;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.nav-icon:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  color: #c47f17; /* brand accent color */
+}
+
+.cart-icon-wrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.cart-count {
+  position: absolute;
+  top: -5px;
+  right: -10px;
+  background-color: #e63946;
+  color: #fff;
+  font-size: 0.7rem;
+  padding: 2px 6px;
+  border-radius: 999px;
+  font-weight: bold;
+}

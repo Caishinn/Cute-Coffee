@@ -192,14 +192,27 @@ document.getElementById("checkoutBtn").addEventListener("click", () => {
   document.querySelectorAll(".cart-item").forEach((item) => {
     const name = item.querySelector("h4").textContent;
     const details = item.querySelector("p").textContent;
-    const qty = item.querySelector(".qty-display").textContent;
-    const total = item.querySelector(".total-display").textContent;
+    const qty = parseInt(item.querySelector(".qty-display").textContent);
+    const totalText = item.querySelector(".total-display").textContent;
+    const total = parseFloat(totalText.replace("Total: $", ""));
+
+    // Safe size/sugar parse
+    let size = "Unknown";
+    let sugar = "Unknown";
+
+    const matches = details.match(/Size:\s*(.*?)\s*\|\s*Sugar:\s*(.*)/);
+    if (matches) {
+      size = matches[1];
+      sugar = matches[2];
+    }
 
     cartItems.push({
       name,
-      details,
       qty,
-      total,
+      size,
+      sugar,
+      price: total / qty,
+      total: `$${total.toFixed(2)}`,
     });
   });
 
