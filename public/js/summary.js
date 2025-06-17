@@ -47,9 +47,9 @@ document.addEventListener("DOMContentLoaded", () => {
       .getTime()
       .toString()
       .slice(-4)}`;
-    const orderDate = now.toLocaleString();
+    const orderDate = now.toISOString();
 
-    let message = `📦 *New Order from ${customerName}*\n\n🆔 Order ID: *${orderId}*\n🕒 ${orderDate}\n\n`;
+    let message = `📦 *New Order from ${customerName}*\n\n🆔 Order ID: *${orderId}*\n🕒 ${now.toLocaleString()}\n\n`;
 
     cartItems.forEach((item) => {
       const { name, qty, size, sugar, price } = item;
@@ -61,8 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     message += `\n💰 Total: $${total.toFixed(2)}`;
 
-    //sent to telegram
-
+    // ✅ Send to Telegram
     fetch("https://cute-coffee.onrender.com/send-telegram", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -71,6 +70,18 @@ document.addEventListener("DOMContentLoaded", () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
+          // ✅ Save to localStorage AFTER Telegram sends successfully
+          const previousOrders =
+            JSON.parse(localStorage.getItem("orderHistory")) || [];
+          previousOrders.push({
+            orderId,
+            customerName,
+            date: orderDate,
+            items: cartItems,
+            total: total.toFixed(2),
+          });
+          localStorage.setItem("orderHistory", JSON.stringify(previousOrders));
+
           alert(`Thank you, ${customerName}! Your payment is being processed.`);
           localStorage.removeItem("cartSummary");
           window.location.href = "index.html";
@@ -84,3 +95,14 @@ document.addEventListener("DOMContentLoaded", () => {
       });
   });
 });
+// Save order to localStorage order history
+// After successful POST to Telegram
+const previousOrders = JSON.parse(localStorage.getItem("orderHistory")) || [];
+previousOrders.push({
+  orderId,
+  customerName,
+  date: orderDate,
+  items: cartItems,
+  total: total.toFixed(2),
+});
+localStorage.setItem("orderHistory", JSON.stringify(previousOrders));

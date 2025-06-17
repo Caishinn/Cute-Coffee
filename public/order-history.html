@@ -3,38 +3,38 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Order History</title>
-    <link rel="stylesheet" href="./css/style.css" />
-    <link rel="stylesheet" href="./css/order-history.css" />
+    <title>Order History - Cute Coffee</title>
     <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     />
+    <link rel="stylesheet" href="./css/summary.css" />
+    <link rel="stylesheet" href="./css/style.css" />
   </head>
-  <body>
-    <header>
+
+  <!-- 🧭 Breadcrumb Header -->
+  <header class="breadcrumb-section">
+    <!-- 🧭 Breadcrumb -->
+    <section>
       <h1>Order History</h1>
-      <a href="index.html" class="back-btn"
-        ><i class="fas fa-arrow-left"></i
-      ></a>
-    </header>
-
-    <main class="order-history">
-      <div class="order-card">
-        <div class="order-header">
-          <h3>Order #1001</h3>
-          <span class="order-date">June 12, 2025</span>
-        </div>
-        <ul class="order-items">
-          <li>Latte × 2</li>
-          <li>Espresso × 1</li>
-        </ul>
-        <div class="order-footer">
-          <p>Total: <strong>$10.50</strong></p>
-        </div>
+      <div class="breadcrumb">
+        <a href="index.html" class="breadcrumb-link">Home</a>
+        <span class="breadcrumb-divider">/</span>
+        <span class="breadcrumb-current">Order History</span>
       </div>
+    </section>
+    <!--div class="breadcrumb-container">
+      <button onclick="history.back()" class="back-btn">← Back</button>
+    </div-->
+  </header>
+  <body class="bg-[#fff7f0] font-sans text-gray-800">
+    <div class="max-w-3xl mx-auto p-6">
+      <div id="orderHistoryContainer" class="space-y-6">
+        <!-- Orders will be inserted here by JS -->
+      </div>
+    </div>
 
-      <!-- More orders below -->
-    </main>
+    <script src="./js/order-history.js"></script>
+    <script src="./js/summary.js"></script>
   </body>
 </html>
