@@ -1,26 +1,24 @@
 // server.js
-
 import express from "express";
-import cors from "cors";
-import { sendOrderToTelegram } from "./telegram.js";
+import path from "path";
+import { fileURLToPath } from "url";
 
 const app = express();
-app.use(cors());
-app.use(express.json());
+const port = process.env.PORT || 3000;
 
-app.post("/send-telegram", async (req, res) => {
-  const { message } = req.body;
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-  if (!message) {
-    return res
-      .status(400)
-      .json({ success: false, error: "Message is required" });
-  }
+// Serve static files under /public route
+app.use("/public", express.static(__dirname));
 
-  const result = await sendOrderToTelegram(message);
-  res.json(result);
+// Optional: redirect root to index.html
+app.get("/", (req, res) => {
+  res.redirect("/public/index.html");
 });
 
-app.listen(3000, () => {
-  console.log("Server running on http://localhost:3000");
+app.listen(port, () => {
+  console.log(
+    `🚀 Server running at http://localhost:${port}/public/index.html`
+  );
 });
