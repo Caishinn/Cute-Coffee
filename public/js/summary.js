@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     message += `\n💰 Total: $${total.toFixed(2)}`;
 
-    fetch("http://localhost:3000/send-telegram", {
+    fetch("/send-telegram", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ message }),
