@@ -9,16 +9,14 @@ const port = process.env.PORT || 3000;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Serve static files under /public route
-app.use("/public", express.static(__dirname));
+// Serve static files from the "Public" folder
+app.use(express.static(path.join(__dirname, "Public")));
 
-// Optional: redirect root to index.html
+// Optional: Default route
 app.get("/", (req, res) => {
-  res.redirect("/public/index.html");
+  res.sendFile(path.join(__dirname, "Public", "index.html"));
 });
 
 app.listen(port, () => {
-  console.log(
-    `🚀 Server running at http://localhost:${port}/public/index.html`
-  );
+  console.log(`✅ Server running at http://localhost:${port}`);
 });
