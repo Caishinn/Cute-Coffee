@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   recentOrders.forEach((order) => {
     const orderEl = document.createElement("div");
-    orderEl.className = "bg-white shadow rounded-xl p-6 mb-4";
+    orderEl.className = "bg-white shadow-sm rounded-xl p-6 mb-4";
 
     const itemsList = order.items
       .map(

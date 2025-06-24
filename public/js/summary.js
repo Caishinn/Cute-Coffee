@@ -49,20 +49,30 @@ document.addEventListener("DOMContentLoaded", () => {
       .slice(-4)}`;
     const orderDate = now.toISOString();
 
-    let message = `📦 *New Order from ${customerName}*\n\n🆔 Order ID: *${orderId}*\n🕒 ${now.toLocaleString()}\n\n`;
+    let message = `*━━━━━━━━━━━━━━━━━━━━━*\n\
+               *🐾 MeowCoffee Receipt 🐾*\n\
+*━━━━━━━━━━━━━━━━━━━━━*\n\n\
+🆔 *Order ID:* ${orderId}\n\
+👤 *Name:* ${customerName}\n\
+📅 *Date:* ${now.toLocaleString()}\n\n\
+*--------------------------*\n\
+🛒 *Items Ordered:*\n\n`;
 
     cartItems.forEach((item) => {
       const { name, qty, size, sugar, price } = item;
       const subtotal = price * qty;
-      message += `- ${name} (Size: ${size}, Sugar: ${sugar}) x${qty} - $${subtotal.toFixed(
-        2
-      )}\n`;
+      message += `• ${name} ☕\n  📏 Size: ${size || "-"} | 🍬 Sugar: ${
+        sugar || "-"
+      }\n  🔢 Qty: ${qty} | 💵 $${subtotal.toFixed(2)}\n\n`;
     });
 
-    message += `\n💰 Total: $${total.toFixed(2)}`;
+    message += `*--------------------------*\n
+🧾 *Total:* $${total.toFixed(2)}\n\n`;
+    //🎉 You Have New Order *MeowCoffee!*\n\
+    //🐈 May your day be as cozy as your drink!\n`;
 
     // ✅ Send to Telegram
-    fetch("https://cute-coffee.onrender.com/send-telegram", {
+    fetch("https://cute-coffee.onrender.com//send-telegram", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ message }),
@@ -95,14 +105,3 @@ document.addEventListener("DOMContentLoaded", () => {
       });
   });
 });
-// Save order to localStorage order history
-// After successful POST to Telegram
-const previousOrders = JSON.parse(localStorage.getItem("orderHistory")) || [];
-previousOrders.push({
-  orderId,
-  customerName,
-  date: orderDate,
-  items: cartItems,
-  total: total.toFixed(2),
-});
-localStorage.setItem("orderHistory", JSON.stringify(previousOrders));
