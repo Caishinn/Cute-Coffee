@@ -24,45 +24,14 @@ document.addEventListener("DOMContentLoaded", () => {
     cartDrawer.classList.add("open");
     cartOverlay.classList.add("show");
     document.body.classList.add("no-scroll");
-    updateCartTotal(); // ✅ Ensure total is recalculated every time
+
+    updateCartTotal();
   }
 
   function closeCart() {
     cartDrawer.classList.remove("open");
     cartOverlay.classList.remove("show");
     document.body.classList.remove("no-scroll");
-  }
-
-  function updateCartCount() {
-    const items = cartItemsContainer.querySelectorAll(".cart-item");
-    let totalQty = 0;
-    items.forEach((item) => {
-      totalQty += parseInt(item.querySelector(".qty-display").textContent) || 0;
-    });
-    cartCount.textContent = totalQty;
-  }
-
-  function updateCartTotal() {
-    const items = cartItemsContainer.querySelectorAll(".cart-item");
-    let total = 0;
-    items.forEach((item) => {
-      const match = item
-        .querySelector(".total-display")
-        .textContent.match(/\$([0-9.]+)/);
-      if (match) total += parseFloat(match[1]);
-    });
-    document.getElementById("cartTotal").textContent = `Total: $${total.toFixed(
-      2
-    )}`;
-  }
-
-  function showEmptyMessageIfNeeded() {
-    if (cartItemsContainer.children.length === 0) {
-      const msg = document.createElement("p");
-      msg.classList.add("empty-msg");
-      msg.textContent = "Your cart is empty.";
-      cartItemsContainer.appendChild(msg);
-    }
   }
 
   addToCartBtn.addEventListener("click", () => {
@@ -73,12 +42,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const quantity = parseInt(document.getElementById("qtyValue").textContent);
 
     let itemPrice = selectedPrice;
-    if (size === "M") itemPrice += 1.0;
+    if (size === "M") {
+      itemPrice += 1.0;
+    }
+
     const totalPrice = (itemPrice * quantity).toFixed(2);
 
-    const existingItem = [
-      ...cartItemsContainer.querySelectorAll(".cart-item"),
-    ].find((item) => {
+    const existingItem = Array.from(
+      cartItemsContainer.querySelectorAll(".cart-item")
+    ).find((item) => {
       const title = item.querySelector("h4").textContent;
       const desc = item.querySelector("p").textContent;
       return (
@@ -91,7 +63,8 @@ document.addEventListener("DOMContentLoaded", () => {
     if (existingItem) {
       const qtyElem = existingItem.querySelector(".qty-display");
       const priceElem = existingItem.querySelector(".total-display");
-      const newQty = parseInt(qtyElem.textContent) + quantity;
+      const currentQty = parseInt(qtyElem.textContent);
+      const newQty = currentQty + quantity;
       qtyElem.textContent = newQty;
       priceElem.textContent = `Total: $${(itemPrice * newQty).toFixed(2)}`;
     } else {
@@ -104,18 +77,23 @@ document.addEventListener("DOMContentLoaded", () => {
         <div class="cart-item-details">
           <h4>${itemName}</h4>
           <p>Size: ${size} | Sugar: ${sugar}</p>
+        
           <p class="total-display">Total: $${totalPrice}</p>
-          <div class="qty-control">
+            <div class="qty-control">
             <button class="decrease-btn">−</button>
             <span class="qty-display">${quantity}</span>
             <button class="increase-btn">+</button>
             <button class="remove-btn">Remove</button>
           </div>
-        </div>`;
+          
+        </div>
+      `;
 
-      cartItemsContainer.querySelector(".empty-msg")?.remove();
+      const emptyMsg = cartItemsContainer.querySelector(".empty-msg");
+      if (emptyMsg) emptyMsg.remove();
       cartItemsContainer.appendChild(cartItem);
 
+      // Remove functionality
       cartItem.querySelector(".remove-btn").addEventListener("click", () => {
         cartItem.remove();
         updateCartCount();
@@ -123,6 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
         showEmptyMessageIfNeeded();
       });
 
+      // Quantity buttons
       const qtyDisplay = cartItem.querySelector(".qty-display");
       const increaseBtn = cartItem.querySelector(".increase-btn");
       const decreaseBtn = cartItem.querySelector(".decrease-btn");
@@ -161,6 +140,43 @@ document.addEventListener("DOMContentLoaded", () => {
   closeCartBtn.addEventListener("click", closeCart);
   cartOverlay.addEventListener("click", closeCart);
 
+  // Update cart count
+  function updateCartCount() {
+    const items = cartItemsContainer.querySelectorAll(".cart-item");
+    let total = 0;
+    items.forEach((item) => {
+      const qtyText = item.querySelector(".qty-display")?.textContent || "0";
+      const qty = parseInt(qtyText, 10);
+      total += qty;
+    });
+    cartCount.textContent = total;
+  }
+
+  // Update total price
+  function updateCartTotal() {
+    const items = cartItemsContainer.querySelectorAll(".cart-item");
+    let total = 0;
+    items.forEach((item) => {
+      const priceText = item.querySelector(".total-display")?.textContent || "";
+      const match = priceText.match(/\$([0-9.]+)/);
+      const price = match ? parseFloat(match[1]) : 0;
+      total += price;
+    });
+    const cartTotal = document.getElementById("cartTotal");
+    if (cartTotal) cartTotal.textContent = `Total: $${total.toFixed(2)}`;
+  }
+
+  // Show empty message
+  function showEmptyMessageIfNeeded() {
+    if (cartItemsContainer.children.length === 0) {
+      const msg = document.createElement("p");
+      msg.classList.add("empty-msg");
+      msg.textContent = "Your cart is empty.";
+      cartItemsContainer.appendChild(msg);
+    }
+  }
+
+  // Clear all button
   const clearBtn = document.getElementById("clearCartBtn");
   if (clearBtn) {
     clearBtn.addEventListener("click", () => {
@@ -172,7 +188,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// Checkout button logic (outside DOMContentLoaded)
+// Checkout handler
 document.getElementById("checkoutBtn").addEventListener("click", () => {
   const cartItems = [];
   document.querySelectorAll(".cart-item").forEach((item) => {
@@ -182,8 +198,8 @@ document.getElementById("checkoutBtn").addEventListener("click", () => {
     const totalText = item.querySelector(".total-display").textContent;
     const total = parseFloat(totalText.replace("Total: $", ""));
 
-    let size = "Unknown",
-      sugar = "Unknown";
+    let size = "Unknown";
+    let sugar = "Unknown";
     const matches = details.match(/Size:\s*(.*?)\s*\|\s*Sugar:\s*(.*)/);
     if (matches) {
       size = matches[1];
@@ -197,7 +213,7 @@ document.getElementById("checkoutBtn").addEventListener("click", () => {
       sugar,
       price: total / qty,
       total: `$${total.toFixed(2)}`,
-      details,
+      details, // ✅ Save full description
     });
   });
 
