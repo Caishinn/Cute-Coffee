@@ -1,9 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Slight delay helps on real mobile devices
-  setTimeout(initSummary, 100);
-});
-
-function initSummary() {
   const summaryItemsContainer = document.getElementById("summaryItems");
   const grandTotalEl = document.getElementById("grandTotal");
   const nameInput = document.getElementById("nameInput");
@@ -12,7 +7,7 @@ function initSummary() {
   const cartItems = JSON.parse(localStorage.getItem("cartSummary")) || [];
   let total = 0;
 
-  if (!Array.isArray(cartItems) || cartItems.length === 0) {
+  if (cartItems.length === 0) {
     summaryItemsContainer.innerHTML = "<p>Your cart is empty.</p>";
     grandTotalEl.textContent = "Total: $0.00";
     confirmBtn.disabled = true;
@@ -20,7 +15,6 @@ function initSummary() {
     return;
   }
 
-  // Render all items
   cartItems.forEach((item) => {
     const itemEl = document.createElement("div");
     itemEl.classList.add("summary-item");
@@ -29,8 +23,8 @@ function initSummary() {
     const subtotal = price * qty;
 
     itemEl.innerHTML = `
-      <h1 class="text-lg font-bold mb-1">${name}</h1>
-      <p class="text-sm">${details}</p>
+      <h1><strong>${name}</strong></h1>
+      <p>${details}</p>
       <p>Qty: ${qty}</p>
       <p>$${subtotal.toFixed(2)}</p>
     `;
@@ -39,10 +33,8 @@ function initSummary() {
     summaryItemsContainer.appendChild(itemEl);
   });
 
-  // Display grand total
   grandTotalEl.textContent = `Total: $${total.toFixed(2)}`;
 
-  // Confirm order button
   confirmBtn.addEventListener("click", () => {
     const customerName = nameInput.value.trim();
     if (!customerName) {
@@ -57,16 +49,14 @@ function initSummary() {
       .slice(-4)}`;
     const orderDate = now.toISOString();
 
-    // 📦 Format message for Telegram
-    let message =
-      `*━━━━━━━━━━━━━━━━━━━━━*\n` +
-      `               *🐾 MeowCoffee Receipt 🐾*\n` +
-      `*━━━━━━━━━━━━━━━━━━━━━*\n\n` +
-      `🆔 *Order ID:* ${orderId}\n` +
-      `👤 *Name:* ${customerName}\n` +
-      `📅 *Date:* ${now.toLocaleString()}\n\n` +
-      `*--------------------------*\n` +
-      `🛒 *Items Ordered:*\n\n`;
+    let message = `*━━━━━━━━━━━━━━━━━━━━━*\n\
+               *🐾 MeowCoffee Receipt 🐾*\n\
+*━━━━━━━━━━━━━━━━━━━━━*\n\n\
+🆔 *Order ID:* ${orderId}\n\
+👤 *Name:* ${customerName}\n\
+📅 *Date:* ${now.toLocaleString()}\n\n\
+*--------------------------*\n\
+🛒 *Items Ordered:*\n\n`;
 
     cartItems.forEach((item) => {
       const { name, qty, size, sugar, price } = item;
@@ -76,13 +66,13 @@ function initSummary() {
       }\n  🔢 Qty: ${qty} | 💵 $${subtotal.toFixed(2)}\n\n`;
     });
 
-    message +=
-      `*--------------------------*\n` +
-      `🧾 *Total:* $${total.toFixed(2)}\n\n` +
-      `🎉 Thank you for choosing MeowCoffee!\n🐈 May your day be as cozy as your drink!\n`;
+    message += `*--------------------------*\n
+🧾 *Total:* $${total.toFixed(2)}\n\n`;
+    //🎉 You Have New Order *MeowCoffee!*\n\
+    //🐈 May your day be as cozy as your drink!\n`;
 
     // ✅ Send to Telegram
-    fetch("https://cute-coffee.onrender.com/send-telegram", {
+    fetch("/send-telegram", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ message }),
@@ -90,7 +80,7 @@ function initSummary() {
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
-          // ✅ Save to order history
+          // ✅ Save to localStorage AFTER Telegram sends successfully
           const previousOrders =
             JSON.parse(localStorage.getItem("orderHistory")) || [];
           previousOrders.push({
@@ -106,12 +96,12 @@ function initSummary() {
           localStorage.removeItem("cartSummary");
           window.location.href = "index.html";
         } else {
-          alert("Failed to send order. Please try again.");
+          alert("Failed to send order.");
         }
       })
       .catch((err) => {
-        console.error("Telegram send error:", err);
-        alert("Something went wrong. Please try again later.");
+        console.error("Error sending order:", err);
+        alert("Something went wrong.");
       });
   });
-}
+});
