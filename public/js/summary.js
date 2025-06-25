@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
     //🐈 May your day be as cozy as your drink!\n`;
 
     // ✅ Send to Telegram
-    fetch("https://cute-coffee.onrender.com//send-telegram", {
+    fetch("https://cute-coffee.onrender.com/send-telegram", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ message }),
