@@ -216,20 +216,6 @@ body {
   transform: translateY(0);
 }
 
-button,
-a.button {
-  transition: background 0.3s, transform 0.2s ease;
-}
-
-button:hover,
-a.button:hover {
-  transform: scale(1.05);
-}
-
-button:active,
-a.button:active {
-  transform: scale(0.97);
-}
 .card {
   opacity: 0;
   transform: translateY(20px);

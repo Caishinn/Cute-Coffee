@@ -22,10 +22,10 @@
 }
 
 .menu-item {
-  background: #f9f9f9;
+  background: #ffffff;
   border-radius: 12px;
   padding: 20px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 20px 10px rgba(0, 0, 0, 0.051);
   display: flex;
   flex-direction: column;
   align-items: center;
