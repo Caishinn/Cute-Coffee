@@ -58,7 +58,6 @@ function initSummary() {
     const orderDate = now.toISOString();
 
     // 📦 Format message for Telegram
-    const orderNumberToday = getTodayOrderNumber();
     let message =
       `*━━━━━━━━━━━━━━━━━━━━━*\n` +
       `               *🐾 MeowCoffee Receipt 🐾*\n` +
@@ -80,11 +79,10 @@ function initSummary() {
     message +=
       `*--------------------------*\n` +
       `🧾 *Total:* $${total.toFixed(2)}\n\n` +
-      `📦 Order #${orderNumberToday} for Today\n`;
-    //`🎉 Thank you for choosing MeowCoffee!\n🐈 May your day be as cozy as your drink!\n`;
+      `🎉 Thank you for choosing MeowCoffee!\n🐈 May your day be as cozy as your drink!\n`;
 
     // ✅ Send to Telegram
-    fetch("https://cute-coffee.onrender.com/send-telegram", {
+    fetch("/send-telegram", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ message }),
@@ -116,16 +114,4 @@ function initSummary() {
         alert("Something went wrong. Please try again later.");
       });
   });
-}
-function getTodayKey() {
-  const today = new Date();
-  return `orderCount-${today.toISOString().slice(0, 10)}`; // e.g. 2025-06-25
-}
-
-function getTodayOrderNumber() {
-  const key = getTodayKey();
-  let count = parseInt(localStorage.getItem(key)) || 0;
-  count += 1;
-  localStorage.setItem(key, count);
-  return count;
 }
