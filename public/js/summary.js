@@ -1,49 +1,48 @@
 document.addEventListener("DOMContentLoaded", () => {
+  // Slight delay helps on real mobile devices
+  setTimeout(initSummary, 100);
+});
+
+function initSummary() {
   const summaryItemsContainer = document.getElementById("summaryItems");
   const grandTotalEl = document.getElementById("grandTotal");
   const nameInput = document.getElementById("nameInput");
   const confirmBtn = document.getElementById("confirmBtn");
 
   const cartItems = JSON.parse(localStorage.getItem("cartSummary")) || [];
-  console.log("Loaded cart items:", cartItems); // Debug for mobile issue
   let total = 0;
 
-  if (cartItems.length === 0) {
-    summaryItemsContainer.innerHTML = `
-      <div class="text-center text-red-500">
-        <p>Your cart is empty.</p>
-        <p>Note: If you added items on another device or tab, they won't appear here.</p>
-      </div>
-    `;
+  if (!Array.isArray(cartItems) || cartItems.length === 0) {
+    summaryItemsContainer.innerHTML = "<p>Your cart is empty.</p>";
     grandTotalEl.textContent = "Total: $0.00";
     confirmBtn.disabled = true;
     confirmBtn.style.opacity = "0.5";
     return;
   }
 
-  // Render each cart item
+  // Render all items
   cartItems.forEach((item) => {
     const itemEl = document.createElement("div");
     itemEl.classList.add("summary-item");
 
     const { name, qty, details, price } = item;
     const subtotal = price * qty;
-    total += subtotal;
 
     itemEl.innerHTML = `
-      <h1><strong>${name}</strong></h1>
-      <p>${details}</p>
+      <h1 class="text-lg font-bold mb-1">${name}</h1>
+      <p class="text-sm">${details}</p>
       <p>Qty: ${qty}</p>
       <p>$${subtotal.toFixed(2)}</p>
     `;
 
+    total += subtotal;
     summaryItemsContainer.appendChild(itemEl);
   });
 
-  // Show total
+  // Display grand total
   grandTotalEl.textContent = `Total: $${total.toFixed(2)}`;
 
-  // Confirm button event
+  // Confirm order button
   confirmBtn.addEventListener("click", () => {
     const customerName = nameInput.value.trim();
     if (!customerName) {
@@ -58,11 +57,11 @@ document.addEventListener("DOMContentLoaded", () => {
       .slice(-4)}`;
     const orderDate = now.toISOString();
 
-    // 🧾 Telegram message format
+    // 📦 Format message for Telegram
     let message =
-      `*━━━━━━━━━━━━━━━━━━━━━*\n` +
-      `               *🐾 MeowCoffee Receipt 🐾*\n` +
-      `*━━━━━━━━━━━━━━━━━━━━━*\n\n` +
+      `*━━━━━━━━━━━━━━━━━━━━━━━*\n` +
+      `*🐾 MeowCoffee Receipt 🐾*\n` +
+      `*━━━━━━━━━━━━━━━━━━━━━━━*\n\n` +
       `🆔 *Order ID:* ${orderId}\n` +
       `👤 *Name:* ${customerName}\n` +
       `📅 *Date:* ${now.toLocaleString()}\n\n` +
@@ -72,15 +71,17 @@ document.addEventListener("DOMContentLoaded", () => {
     cartItems.forEach((item) => {
       const { name, qty, size, sugar, price } = item;
       const subtotal = price * qty;
-      message += `• ${name} ☕\n  📏 Size: ${size || "-"} | 🍬 Sugar: ${
-        sugar || "-"
-      }\n  🔢 Qty: ${qty} | 💵 $${subtotal.toFixed(2)}\n\n`;
+      message +=
+        `• ${name} ☕\n` +
+        `  📏 Size: ${size || "-"} | 🍬 Sugar: ${sugar || "-"}\n` +
+        `  🔢 Qty: ${qty} | 💵 $${subtotal.toFixed(2)}\n\n`;
     });
 
     message +=
       `*--------------------------*\n` +
       `🧾 *Total:* $${total.toFixed(2)}\n\n` +
-      `🎉 Thank you for choosing MeowCoffee!\n🐈 May your day be as cozy as your drink!\n`;
+      `🎉 Thank you for ordering from *MeowCoffee!* 🐈\n` +
+      `☕ May your day be as cozy as your drink!`;
 
     // ✅ Send to Telegram
     fetch("https://cute-coffee.onrender.com/send-telegram", {
@@ -91,6 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
+          // ✅ Save to order history
           const previousOrders =
             JSON.parse(localStorage.getItem("orderHistory")) || [];
           previousOrders.push({
@@ -106,12 +108,12 @@ document.addEventListener("DOMContentLoaded", () => {
           localStorage.removeItem("cartSummary");
           window.location.href = "index.html";
         } else {
-          alert("Failed to send order.");
+          alert("Failed to send order. Please try again.");
         }
       })
       .catch((err) => {
-        console.error("Error sending order:", err);
-        alert("Something went wrong.");
+        console.error("Telegram send error:", err);
+        alert("Something went wrong. Please try again later.");
       });
   });
-});
+}
