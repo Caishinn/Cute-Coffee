@@ -24,6 +24,8 @@ document.addEventListener("DOMContentLoaded", () => {
     cartDrawer.classList.add("open");
     cartOverlay.classList.add("show");
     document.body.classList.add("no-scroll");
+
+    updateCartTotal();
   }
 
   function closeCart() {
