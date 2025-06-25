@@ -58,10 +58,11 @@ function initSummary() {
     const orderDate = now.toISOString();
 
     // 📦 Format message for Telegram
+    const orderNumberToday = getTodayOrderNumber();
     let message =
-      `*━━━━━━━━━━━━━━━━━━━━━━━*\n` +
-      `*🐾 MeowCoffee Receipt 🐾*\n` +
-      `*━━━━━━━━━━━━━━━━━━━━━━━*\n\n` +
+      `*━━━━━━━━━━━━━━━━━━━━━*\n` +
+      `               *🐾 MeowCoffee Receipt 🐾*\n` +
+      `*━━━━━━━━━━━━━━━━━━━━━*\n\n` +
       `🆔 *Order ID:* ${orderId}\n` +
       `👤 *Name:* ${customerName}\n` +
       `📅 *Date:* ${now.toLocaleString()}\n\n` +
@@ -71,17 +72,16 @@ function initSummary() {
     cartItems.forEach((item) => {
       const { name, qty, size, sugar, price } = item;
       const subtotal = price * qty;
-      message +=
-        `• ${name} ☕\n` +
-        `  📏 Size: ${size || "-"} | 🍬 Sugar: ${sugar || "-"}\n` +
-        `  🔢 Qty: ${qty} | 💵 $${subtotal.toFixed(2)}\n\n`;
+      message += `• ${name} ☕\n  📏 Size: ${size || "-"} | 🍬 Sugar: ${
+        sugar || "-"
+      }\n  🔢 Qty: ${qty} | 💵 $${subtotal.toFixed(2)}\n\n`;
     });
 
     message +=
       `*--------------------------*\n` +
       `🧾 *Total:* $${total.toFixed(2)}\n\n` +
-      `🎉 Thank you for ordering from *MeowCoffee!* 🐈\n` +
-      `☕ May your day be as cozy as your drink!`;
+      `📦 Order #${orderNumberToday} for Today\n`;
+    //`🎉 Thank you for choosing MeowCoffee!\n🐈 May your day be as cozy as your drink!\n`;
 
     // ✅ Send to Telegram
     fetch("https://cute-coffee.onrender.com/send-telegram", {
@@ -116,4 +116,16 @@ function initSummary() {
         alert("Something went wrong. Please try again later.");
       });
   });
+}
+function getTodayKey() {
+  const today = new Date();
+  return `orderCount-${today.toISOString().slice(0, 10)}`; // e.g. 2025-06-25
+}
+
+function getTodayOrderNumber() {
+  const key = getTodayKey();
+  let count = parseInt(localStorage.getItem(key)) || 0;
+  count += 1;
+  localStorage.setItem(key, count);
+  return count;
 }
