@@ -164,13 +164,19 @@ body {
 /* === BREADCRUMB === */
 .breadcrumb-section {
   background-color: #f0f0f0;
-  padding: 50px;
+  padding: 40px;
   text-align: center;
 }
 
 .breadcrumb-section h1 {
   font-size: 32px;
   font-weight: 600;
+}
+.breadcrumb-section p strong {
+  color: #000000;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-top: 0.5rem;
 }
 
 .breadcrumb-section p {

@@ -194,7 +194,7 @@ input[type="text"]:focus {
   padding-top: 0.5rem;
   border-top: 5px solid #eee;
   background: #fff;
-  position: sticky;
+  position: none;
   bottom: 0;
   display: flex;
   flex-direction: column;
@@ -258,5 +258,6 @@ input[type="text"]:focus {
   .order-summary {
     max-width: 100%;
     padding: 1.5rem;
+    z-index: -1;
   }
 }

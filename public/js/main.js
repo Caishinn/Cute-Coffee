@@ -40,37 +40,6 @@ document.addEventListener("DOMContentLoaded", function () {
         ? "inset 0 8px 8px -8px rgba(0,0,0,0.1)"
         : "none";
   });
-
-  // 🔍 Search functionality
-  const searchInput = document.getElementById("menuSearchInput");
-  const menuItems = document.querySelectorAll(".menu-item");
-
-  if (searchInput) {
-    searchInput.addEventListener("input", function () {
-      const value = searchInput.value.toLowerCase().trim();
-      menuItems.forEach((item) => {
-        const name = item.querySelector("h3")?.textContent.toLowerCase();
-        item.style.display = name.includes(value) ? "block" : "none";
-      });
-    });
-  } else {
-    console.warn("menuSearchInput not found");
-  }
-  document.addEventListener("DOMContentLoaded", function () {
-    const searchInput = document.getElementById("menuSearchInput");
-
-    searchInput?.addEventListener("input", function () {
-      const value = searchInput.value.toLowerCase().trim();
-
-      const menuItems = document.querySelectorAll(".menu-item");
-
-      menuItems.forEach((item) => {
-        const name = item.querySelector("h3")?.textContent.toLowerCase();
-        const matches = name?.includes(value);
-        item.style.display = matches ? "block" : "none";
-      });
-    });
-  });
 });
 
 // Animation

@@ -33,7 +33,6 @@
   display: flex;
   gap: 16px;
   padding: 1rem 0 0 0.7rem;
-  border-bottom: 1px solid #eee;
 }
 
 /* Keep checkout button always visible */
@@ -162,7 +161,7 @@
 .cart-total {
   text-align: right;
   font-weight: bold;
-  margin: 40px 20px 12px;
+  margin: 20px 0;
   font-size: 1.15rem;
 }
 

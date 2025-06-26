@@ -1,49 +1,49 @@
 document.addEventListener("DOMContentLoaded", () => {
   const filterButtons = document.querySelectorAll(".filter-btn");
-  const menuItems = document.querySelectorAll(".menu-item");
-
-  filterButtons.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      // Remove active class from previously active button
-      document.querySelector(".filter-btn.active")?.classList.remove("active");
-      btn.classList.add("active");
-
-      const category = btn.dataset.category;
-
-      menuItems.forEach((item) => {
-        const categories = item.dataset.category.split(" ");
-
-        if (category === "all" || categories.includes(category)) {
-          item.style.display = "block";
-        } else {
-          item.style.display = "none";
-        }
-      });
-    });
-  });
   const searchInput = document.getElementById("menuSearchInput");
   const clearSearch = document.getElementById("clearSearch");
+  const menuItems = document.querySelectorAll(".menu-item");
 
-  searchInput.addEventListener("input", () => {
-    const value = searchInput.value.trim();
-    clearSearch.style.display = value ? "inline" : "none";
+  let currentCategory = "all";
 
-    document.querySelectorAll(".menu-item").forEach((item) => {
-      const name = item.querySelector("h3").textContent.toLowerCase();
-      item.style.display = name.includes(value.toLowerCase())
-        ? "block"
-        : "none";
+  // Function to update visible items based on search and category
+  function updateMenuItems() {
+    const searchTerm = searchInput.value.toLowerCase().trim();
+
+    menuItems.forEach((item) => {
+      const title = item.querySelector("h3").textContent.toLowerCase();
+      const categories = item.dataset.category.split(" ");
+      const matchesCategory =
+        currentCategory === "all" || categories.includes(currentCategory);
+      const matchesSearch = title.includes(searchTerm);
+
+      item.style.display = matchesCategory && matchesSearch ? "block" : "none";
+    });
+
+    // Toggle clear search button
+    clearSearch.style.display = searchTerm ? "inline" : "none";
+  }
+
+  // Handle filter button clicks
+  filterButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      filterButtons.forEach((btn) => btn.classList.remove("active"));
+      button.classList.add("active");
+      currentCategory = button.dataset.category;
+      updateMenuItems();
     });
   });
 
+  // Handle search input typing
+  searchInput.addEventListener("input", updateMenuItems);
+
+  // Clear search button logic
   clearSearch.addEventListener("click", () => {
     searchInput.value = "";
-    clearSearch.style.display = "none";
-
-    document.querySelectorAll(".menu-item").forEach((item) => {
-      item.style.display = "block";
-    });
-
+    updateMenuItems();
     searchInput.focus();
   });
+
+  // Initialize on page load
+  updateMenuItems();
 });
