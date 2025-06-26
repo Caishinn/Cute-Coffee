@@ -18,6 +18,7 @@ header.navbar {
 header {
   position: fixed;
   width: 100%;
+  z-index: 900;
   top: 0;
   box-shadow: 0 1px rgba (167, 167, 167, 0.1);
 }

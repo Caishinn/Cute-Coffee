@@ -1,3 +1,5 @@
+// cart.js
+
 document.addEventListener("DOMContentLoaded", () => {
   const cartIcon = document.querySelector(".fa-shopping-cart");
   const cartDrawer = document.getElementById("cartDrawer");
@@ -11,12 +13,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const overlay = document.getElementById("modalOverlay");
 
   let selectedPrice = 0;
+  let selectedPromo = "None";
 
   document.querySelectorAll(".add-btn").forEach((btn) => {
     btn.addEventListener("click", (e) => {
       const menuItem = e.target.closest(".menu-item");
-      const priceText = menuItem.querySelector(".menu-footer p").textContent;
-      selectedPrice = parseFloat(priceText.replace("$", "")) || 0;
+      selectedPrice = parseFloat(menuItem.dataset.price);
+      selectedPromo = menuItem.dataset.promo || "None";
     });
   });
 
@@ -24,7 +27,6 @@ document.addEventListener("DOMContentLoaded", () => {
     cartDrawer.classList.add("open");
     cartOverlay.classList.add("show");
     document.body.classList.add("no-scroll");
-
     updateCartTotal();
   }
 
@@ -42,21 +44,26 @@ document.addEventListener("DOMContentLoaded", () => {
     const quantity = parseInt(document.getElementById("qtyValue").textContent);
 
     let itemPrice = selectedPrice;
-    if (size === "M") {
-      itemPrice += 1.0;
-    }
+    if (size === "M") itemPrice += 1.0;
 
-    const totalPrice = (itemPrice * quantity).toFixed(2);
+    let subtotalQty = quantity;
+    let subtotal = itemPrice * quantity;
+
+    if (selectedPromo.includes("%")) {
+      const percent = parseInt(selectedPromo);
+      subtotal = itemPrice * quantity * ((100 - percent) / 100);
+    } else if (selectedPromo === "B1G1") {
+      subtotalQty += Math.floor(quantity / 1); // get 1 free per 1 bought
+      subtotal = itemPrice * Math.ceil(quantity / 2); // only pay for half
+    }
 
     const existingItem = Array.from(
       cartItemsContainer.querySelectorAll(".cart-item")
     ).find((item) => {
-      const title = item.querySelector("h4").textContent;
-      const desc = item.querySelector("p").textContent;
       return (
-        title === itemName &&
-        desc.includes(`Size: ${size}`) &&
-        desc.includes(`Sugar: ${sugar}`)
+        item.querySelector("h4").textContent === itemName &&
+        item.querySelector("p").textContent.includes(`Size: ${size}`) &&
+        item.querySelector("p").textContent.includes(`Sugar: ${sugar}`)
       );
     });
 
@@ -65,8 +72,17 @@ document.addEventListener("DOMContentLoaded", () => {
       const priceElem = existingItem.querySelector(".total-display");
       const currentQty = parseInt(qtyElem.textContent);
       const newQty = currentQty + quantity;
+
+      let newSubtotal = itemPrice * newQty;
+      if (selectedPromo.includes("%")) {
+        const percent = parseInt(selectedPromo);
+        newSubtotal = newSubtotal * ((100 - percent) / 100);
+      } else if (selectedPromo === "B1G1") {
+        newSubtotal = itemPrice * Math.ceil(newQty / 2);
+      }
+
       qtyElem.textContent = newQty;
-      priceElem.textContent = `Total: $${(itemPrice * newQty).toFixed(2)}`;
+      priceElem.textContent = `Total: $${newSubtotal.toFixed(2)}`;
     } else {
       const cartItem = document.createElement("div");
       cartItem.classList.add("cart-item");
@@ -76,24 +92,20 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
         <div class="cart-item-details">
           <h4>${itemName}</h4>
-          <p>Size: ${size} | Sugar: ${sugar}</p>
-        
-          <p class="total-display">Total: $${totalPrice}</p>
-            <div class="qty-control">
+          <p>Size: ${size} | Sugar: ${sugar} | Promo: ${selectedPromo}</p>
+          <p class="total-display">Total: $${subtotal.toFixed(2)}</p>
+          <div class="qty-control">
             <button class="decrease-btn">−</button>
             <span class="qty-display">${quantity}</span>
             <button class="increase-btn">+</button>
             <button class="remove-btn">Remove</button>
           </div>
-          
         </div>
       `;
-
       const emptyMsg = cartItemsContainer.querySelector(".empty-msg");
       if (emptyMsg) emptyMsg.remove();
       cartItemsContainer.appendChild(cartItem);
 
-      // Remove functionality
       cartItem.querySelector(".remove-btn").addEventListener("click", () => {
         cartItem.remove();
         updateCartCount();
@@ -101,7 +113,17 @@ document.addEventListener("DOMContentLoaded", () => {
         showEmptyMessageIfNeeded();
       });
 
-      // Quantity buttons
+      //clear button in drawer
+      const clearBtn = document.getElementById("clearCartBtn");
+      if (clearBtn) {
+        clearBtn.addEventListener("click", () => {
+          cartItemsContainer.innerHTML = "";
+          updateCartCount();
+          updateCartTotal();
+          showEmptyMessageIfNeeded();
+        });
+      }
+
       const qtyDisplay = cartItem.querySelector(".qty-display");
       const increaseBtn = cartItem.querySelector(".increase-btn");
       const decreaseBtn = cartItem.querySelector(".decrease-btn");
@@ -111,7 +133,14 @@ document.addEventListener("DOMContentLoaded", () => {
         let qty = parseInt(qtyDisplay.textContent);
         qty++;
         qtyDisplay.textContent = qty;
-        totalElem.textContent = `Total: $${(itemPrice * qty).toFixed(2)}`;
+        let newSubtotal = itemPrice * qty;
+        if (selectedPromo.includes("%")) {
+          const percent = parseInt(selectedPromo);
+          newSubtotal = newSubtotal * ((100 - percent) / 100);
+        } else if (selectedPromo === "B1G1") {
+          newSubtotal = itemPrice * Math.ceil(qty / 2);
+        }
+        totalElem.textContent = `Total: $${newSubtotal.toFixed(2)}`;
         updateCartCount();
         updateCartTotal();
       });
@@ -121,7 +150,14 @@ document.addEventListener("DOMContentLoaded", () => {
         if (qty > 1) {
           qty--;
           qtyDisplay.textContent = qty;
-          totalElem.textContent = `Total: $${(itemPrice * qty).toFixed(2)}`;
+          let newSubtotal = itemPrice * qty;
+          if (selectedPromo.includes("%")) {
+            const percent = parseInt(selectedPromo);
+            newSubtotal = newSubtotal * ((100 - percent) / 100);
+          } else if (selectedPromo === "B1G1") {
+            newSubtotal = itemPrice * Math.ceil(qty / 2);
+          }
+          totalElem.textContent = `Total: $${newSubtotal.toFixed(2)}`;
           updateCartCount();
           updateCartTotal();
         }
@@ -130,7 +166,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     updateCartCount();
     updateCartTotal();
-
     modal.style.display = "none";
     overlay.style.display = "none";
     document.body.classList.remove("no-scroll");
@@ -140,33 +175,27 @@ document.addEventListener("DOMContentLoaded", () => {
   closeCartBtn.addEventListener("click", closeCart);
   cartOverlay.addEventListener("click", closeCart);
 
-  // Update cart count
   function updateCartCount() {
     const items = cartItemsContainer.querySelectorAll(".cart-item");
     let total = 0;
     items.forEach((item) => {
-      const qtyText = item.querySelector(".qty-display")?.textContent || "0";
-      const qty = parseInt(qtyText, 10);
-      total += qty;
+      total += parseInt(item.querySelector(".qty-display").textContent);
     });
     cartCount.textContent = total;
   }
 
-  // Update total price
   function updateCartTotal() {
     const items = cartItemsContainer.querySelectorAll(".cart-item");
     let total = 0;
     items.forEach((item) => {
-      const priceText = item.querySelector(".total-display")?.textContent || "";
+      const priceText = item.querySelector(".total-display").textContent;
       const match = priceText.match(/\$([0-9.]+)/);
-      const price = match ? parseFloat(match[1]) : 0;
-      total += price;
+      total += match ? parseFloat(match[1]) : 0;
     });
-    const cartTotal = document.getElementById("cartTotal");
-    if (cartTotal) cartTotal.textContent = `Total: $${total.toFixed(2)}`;
+    document.getElementById("cartTotal").textContent = `Total: $${total.toFixed(
+      2
+    )}`;
   }
-
-  // Show empty message
   function showEmptyMessageIfNeeded() {
     if (cartItemsContainer.children.length === 0) {
       const msg = document.createElement("p");
@@ -176,47 +205,39 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Clear all button
-  const clearBtn = document.getElementById("clearCartBtn");
-  if (clearBtn) {
-    clearBtn.addEventListener("click", () => {
-      cartItemsContainer.innerHTML = "";
-      updateCartCount();
-      updateCartTotal();
-      showEmptyMessageIfNeeded();
+  document.getElementById("checkoutBtn").addEventListener("click", () => {
+    const cartItems = [];
+    document.querySelectorAll(".cart-item").forEach((item) => {
+      const name = item.querySelector("h4").textContent;
+      const desc = item.querySelector("p").textContent;
+      const qty = parseInt(item.querySelector(".qty-display").textContent);
+      const totalText = item.querySelector(".total-display").textContent;
+      const total = parseFloat(totalText.replace("Total: $", ""));
+
+      let size = "Unknown",
+        sugar = "Unknown",
+        promo = "None";
+      const match = desc.match(/Size: (.*?) \| Sugar: (.*?) \| Promo: (.*)/);
+      if (match) {
+        size = match[1];
+        sugar = match[2];
+        promo = match[3];
+      }
+
+      const unitPrice = total / (promo === "B1G1" ? Math.ceil(qty / 2) : qty);
+
+      cartItems.push({
+        name,
+        qty,
+        size,
+        sugar,
+        promo,
+        price: unitPrice,
+        subtotal: total,
+      });
     });
-  }
-});
 
-// Checkout handler
-document.getElementById("checkoutBtn").addEventListener("click", () => {
-  const cartItems = [];
-  document.querySelectorAll(".cart-item").forEach((item) => {
-    const name = item.querySelector("h4").textContent;
-    const details = item.querySelector("p").textContent;
-    const qty = parseInt(item.querySelector(".qty-display").textContent);
-    const totalText = item.querySelector(".total-display").textContent;
-    const total = parseFloat(totalText.replace("Total: $", ""));
-
-    let size = "Unknown";
-    let sugar = "Unknown";
-    const matches = details.match(/Size:\s*(.*?)\s*\|\s*Sugar:\s*(.*)/);
-    if (matches) {
-      size = matches[1];
-      sugar = matches[2];
-    }
-
-    cartItems.push({
-      name,
-      qty,
-      size,
-      sugar,
-      price: total / qty,
-      total: `$${total.toFixed(2)}`,
-      details, // ✅ Save full description
-    });
+    localStorage.setItem("cartSummary", JSON.stringify(cartItems));
+    window.location.href = "summary.html";
   });
-
-  localStorage.setItem("cartSummary", JSON.stringify(cartItems));
-  window.location.href = "summary.html";
 });

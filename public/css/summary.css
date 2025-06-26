@@ -258,6 +258,5 @@ input[type="text"]:focus {
   .order-summary {
     max-width: 100%;
     padding: 1.5rem;
-    z-index: -1;
   }
 }

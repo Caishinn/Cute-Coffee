@@ -1,6 +1,6 @@
 /* === MENU SECTION === */
 .menu-section {
-  padding: 60px 20px;
+  padding: 40px 20px;
   background-color: #fff;
   text-align: center;
 }
@@ -11,7 +11,12 @@
   font-weight: 600;
   color: #333;
 }
-
+.menu-title-promtion {
+  font-size: 24px;
+  margin: 30px;
+  font-weight: 600;
+  color: #333;
+}
 .menu-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -54,8 +59,13 @@
 
 .menu-details h3 {
   font-size: 16px;
+  font-weight: bolder;
   color: #333;
-  border-bottom: 1px solid #eee;
+}
+.menu-details span {
+  font-size: 14px;
+  font-weight: 500;
+  color: #1ecfe0;
   padding-bottom: 1rem;
 }
 
@@ -93,6 +103,8 @@
   font-weight: bold;
   margin: 0;
   font-size: 16px;
+  text-align: left;
+  padding: 0 5px;
 }
 /*.menu-footer .price {
   font-size: 16px;
@@ -160,6 +172,26 @@
   color: #aaa;
   cursor: pointer;
   display: none;
+}
+
+/*promotion badge*/
+
+.promo-badge {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: #5ac3ff;
+  color: white;
+  font-weight: bold;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0 0.5rem 0.5rem 0;
+  font-size: 0.75rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+}
+.menu-item {
+  position: relative; /* Needed for absolute badge positioning */
+  /* ...existing styles */
 }
 
 @media (min-width: 769px) {

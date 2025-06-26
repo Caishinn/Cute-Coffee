@@ -59,13 +59,12 @@
   padding: 0.3rem 0.9rem;
   cursor: pointer;
   z-index: 100;
-  border-radius: 50%;
 }
 .banner-nav.left {
-  left: 20px;
+  left: 40px;
 }
 .banner-nav.right {
-  right: 20px;
+  right: 40px;
 }
 
 /* Dots */
@@ -116,9 +115,12 @@
     font-size: 0.7rem;
   }
   .banner-nav.left {
-    left: 10px;
+    left: 8px;
   }
   .banner-nav.right {
-    right: 10px;
+    right: 8px;
+  }
+  .banner-nav {
+    top: 50%;
   }
 }

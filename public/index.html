@@ -95,6 +95,7 @@
 
     <!-- 📋 Menu Grid ----------------------------------------------------->
     <section class="menu-section" id="menu">
+      
       <h2 class="menu-title">Our Menu</h2>
       <div class="menu-search" style="position: relative">
         <input
@@ -134,17 +135,23 @@
         <button class="filter-btn" data-category="best-seller">
           Best Seller
         </button>
+        <button class="filter-btn" data-category="B1G1">Buy 1 Get 1</button>
         <button class="filter-btn" data-category="50%">50%</button>
         <button class="filter-btn" data-category="coffee">Coffee</button>
         <button class="filter-btn" data-category="tea">Tea</button>
         <button class="filter-btn" data-category="smoothie">Smoothie</button>
       </div>
+
+      <!--Menu Grid --------------------------------------------------------------------------------->
       <div class="menu-grid">
         <!-- Menu Item Template (repeat as needed) -->
 
-        <!-- Ice Latte-->
-        <div class="menu-item" data-category="coffee best-seller 50%">
+        <!--Ice Latte-->
+        <div class="menu-item" data-category="coffee best-seller 50%" data-name="Ice Latte" 
+        data-price="1.50"
+        data-promo="50%">
           <img src="./cafe-image/ice latte.png" alt="Ice Latte" />
+          <div class="promo-badge">50% OFF</div>
           <div class="menu-details">
             <h3>Ice Latte</h3>
             <div class="menu-footer">
@@ -154,103 +161,117 @@
           </div>
         </div>
 
-        <!-- Cappucino-->
-        <div class="menu-item" data-category="coffee smoothie 50% best-seller">
-          <img src="./cafe-image/cappucino.png" alt="Cappucino" />
-          <div class="menu-details">
-            <h3>Cappucino</h3>
-            <div class="menu-footer">
-              <p>$2.50</p>
-              <button class="add-btn"><i class="fas fa-plus"></i></button>
-            </div>
-          </div>
+         <!--Cappucino-->
+         <div class="menu-item" data-category="coffee smoothie best-seller 50%" data-name="Cappucino" 
+         data-price="2.50"
+         data-promo="50%">
+           <img src="./cafe-image/cappucino.png" alt="Cappucino" />
+           <div class="promo-badge">50% OFF</div>
+           <div class="menu-details">
+             <h3>Cappucino</h3>
+             <div class="menu-footer">
+               <p>$2.50</p>
+               <button class="add-btn"><i class="fas fa-plus"></i></button>
+             </div>
+           </div>
+         </div>
+
+         <!-- Chocolate-->
+        <div class="menu-item" data-category="smoothie best-seller 50%" data-name="Chocolate" 
+         data-price="2.00">
+           <img src="./cafe-image/chocolate.png" alt="Chocolate" />
+           <div class="promo-badge">50% OFF</div>
+           <div class="menu-details">
+             <h3>Chocolate</h3>
+             <div class="menu-footer">
+               <p>$2.00</p>
+               <button class="add-btn"><i class="fas fa-plus"></i></button>
+             </div>
+           </div>
         </div>
 
-        <!-- Americano-->
-        <div class="menu-item" data-category="coffee ">
-          <img src="./cafe-image/Americano.png" alt="Americano" />
-          <div class="menu-details">
-            <h3>Americano</h3>
-            <div class="menu-footer">
-              <p>$2.00</p>
-              <button class="add-btn"><i class="fas fa-plus"></i></button>
+         <!-- Americano-->
+         <div class="menu-item" data-category="coffee" data-name="Americano" 
+         data-price="2.00">
+           <img src="./cafe-image/Americano.png" alt="Americano" />
+           <div class="menu-details">
+             <h3>Americano</h3>
+             <div class="menu-footer">
+               <p>$2.00</p>
+               <button class="add-btn"><i class="fas fa-plus"></i></button>
+              </div>
             </div>
-          </div>
-        </div>
-
-        <!-- Chocolate-->
-        <div class="menu-item" data-category="coffee smoothie -50% best-seller">
-          <img src="./cafe-image/chocolate.png" alt="Chocolate" />
-          <div class="menu-details">
-            <h3>Chocolate</h3>
-            <div class="menu-footer">
-              <p>$2.00</p>
-              <button class="add-btn"><i class="fas fa-plus"></i></button>
-            </div>
-          </div>
         </div>
 
         <!-- Red Tea-->
-        <div class="menu-item" data-category="tea best-seller">
-          <img src="./cafe-image/Red Tea.png" alt="Red Tea" />
-          <div class="menu-details">
-            <h3>Red Tea</h3>
-            <div class="menu-footer">
-              <p>$1.00</p>
-              <button class="add-btn"><i class="fas fa-plus"></i></button>
+        <div class="menu-item" data-category="coffee best-seller" data-name="Red Tea" 
+          data-price="1.00">
+            <img src="./cafe-image/Red Tea.png" alt="Red Tea" />
+            <div class="menu-details">
+              <h3>Red Tea</h3>
+              <div class="menu-footer">
+                <p>$1.00</p>
+                <button class="add-btn"><i class="fas fa-plus"></i></button>
+              </div>
             </div>
-          </div>
         </div>
 
         <!-- Green Tea-->
-        <div class="menu-item" data-category="tea best-seller">
-          <img src="./cafe-image/Green Tea.png" alt="Green Tea" />
-          <div class="menu-details">
-            <h3>Green Tea</h3>
-            <div class="menu-footer">
-              <p>$1.00</p>
-              <button class="add-btn"><i class="fas fa-plus"></i></button>
-            </div>
-          </div>
+        <div class="menu-item" data-category="coffee best-seller" data-name="Green Tea" 
+           data-price="1.00">
+             <img src="./cafe-image/Green Tea.png" alt="Green Tea" />
+             <div class="menu-details">
+               <h3>Green Tea</h3>
+               <div class="menu-footer">
+                 <p>$1.00</p>
+                 <button class="add-btn"><i class="fas fa-plus"></i></button>
+                </div>
+             </div>
         </div>
 
-        <!-- Green lemon Tea-->
-        <div class="menu-item" data-category="tea best-seller">
-          <img src="./cafe-image/Green Lemon.png" alt="Green Lemon" />
-          <div class="menu-details">
-            <h3>Green Lemon</h3>
-            <div class="menu-footer">
-              <p>$1.00</p>
-              <button class="add-btn"><i class="fas fa-plus"></i></button>
-            </div>
-          </div>
-        </div>
+         <!-- Red lemon Tea-->
+         <div class="menu-item" data-category="tea best-seller B1G1" data-name="Red Lemon" 
+         data-price="1.00" 
+         data-promo="Buy 1 Get 1">
+           <img src="./cafe-image/red lemon.png" alt="Red Lemon" />
+           <div class="promo-badge">BUY 1 GET 1</div>
+           <div class="menu-details">
+             <h3>Red Lemon</h3>
+             <div class="menu-footer">
+               <p>$1.00</p>
+               <button class="add-btn"><i class="fas fa-plus"></i></button>
+             </div>
+           </div>
+         </div>
 
-        <!-- Red lemon Tea-->
-        <div class="menu-item" data-category="tea best-seller">
-          <img src="./cafe-image/red lemon.png" alt="Red Lemon" />
-          <div class="menu-details">
-            <h3>Red Lemon</h3>
-            <div class="menu-footer">
-              <p>$1.00</p>
-              <button class="add-btn"><i class="fas fa-plus"></i></button>
-            </div>
-          </div>
-        </div>
-
+         <!-- Green lemon Tea-->
+         <div class="menu-item" data-category="tea best-seller B1G1" data-name="Green Lemon" 
+         data-price="1.00" 
+         data-promo="Buy 1 Get 1">
+           <img src="./cafe-image/Green Lemon.png" alt="Green Lemon" />
+           <div class="promo-badge">BUY 1 GET 1</div>
+           <div class="menu-details">
+             <h3>Green Lemon</h3>
+             <div class="menu-footer">
+               <p>$1.00</p>
+               <button class="add-btn"><i class="fas fa-plus"></i></button>
+             </div>
+           </div>
+         </div>
         <!-- Duplicate items for testing scrolling -->
         <!-- ... -->
       </div>
+      
     </section>
 
-    <!--promotion------------------------------------------------->
+    <!--Promotion --------------------------------------------------------------------------------->
 
     <!-- Promo Banner Section -->
 
     <section class="promo-banner-section" id="promotion">
       <!-- Promo Banner Section -->
       <div class="promotion-title">
-        <h2>Our Promotion</h2>
+        <h2>Special Weekend</h2>
       </div>
       <div class="promo-banner-slider" id="bannerSlider">
         <div class="promo-slide">
