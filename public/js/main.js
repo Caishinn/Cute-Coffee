@@ -53,3 +53,7 @@ const observer = new IntersectionObserver((entries) => {
 });
 
 document.querySelectorAll(".fade-in").forEach((el) => observer.observe(el));
+
+document.querySelector(".logo").addEventListener("click", () => {
+  window.location.href = "index.html";
+});
