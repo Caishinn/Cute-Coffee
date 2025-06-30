@@ -67,6 +67,7 @@ body {
   font-size: 20px;
   font-weight: 600;
   gap: 10px;
+  cursor: pointer;
 }
 
 .logo-circle {
