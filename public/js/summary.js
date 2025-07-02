@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let message =
       `*━━━━━━━━━━━━━━━━━━━━━*\n` +
-      `                 *🐾 CC-Coffee Receipt 🐾*\n` +
+      `                *🐾 CC-Coffee Receipt 🐾*\n` +
       `*━━━━━━━━━━━━━━━━━━━━━*\n\n` +
       `🆔 *Order ID:* ${orderId}\n` +
       `👤 *Name:* ${customerName}\n` +
